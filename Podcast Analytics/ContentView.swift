@@ -9,27 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Color(red: 0.2, green: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/, blue: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
-            VStack {
-                Text("Hello, Connor and Kirk!")
-                    .foregroundColor(.white)
-                    .dynamicTypeSize(.xLarge)
-                Text("Welcome to your Corner")
-                    .foregroundColor(.white)
-                    .dynamicTypeSize(.xLarge)
-            }
-            .padding()
-        }
-        
+        WelcomePage()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
 
 //struct Previews_ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
