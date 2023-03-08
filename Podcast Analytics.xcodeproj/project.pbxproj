@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8629B9415100D30223 /* NavBarButton.swift */; };
+		4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8A29B9436000D30223 /* EpisodesPage.swift */; };
+		4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8C29B943B100D30223 /* ProfilePage.swift */; };
 		4DA89C9729A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */; };
 		4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */; };
 		4DA89C9B29A6BC6400B0EA15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DA89C9A29A6BC6400B0EA15 /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D622B8629B9415100D30223 /* NavBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarButton.swift; sourceTree = "<group>"; };
+		4D622B8A29B9436000D30223 /* EpisodesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesPage.swift; sourceTree = "<group>"; };
+		4D622B8C29B943B100D30223 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		4DA89C9329A6BC5D00B0EA15 /* Podcast Analytics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Podcast Analytics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast_AnalyticsApp.swift; sourceTree = "<group>"; };
 		4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +86,9 @@
 				4DD0C5CD29B1194800063FDE /* WelcomePage.swift */,
 				4DD0C5CF29B11C9C00063FDE /* TotalsPage.swift */,
 				4DD0C5D129B11DA400063FDE /* NavBar.swift */,
+				4D622B8629B9415100D30223 /* NavBarButton.swift */,
+				4D622B8A29B9436000D30223 /* EpisodesPage.swift */,
+				4D622B8C29B943B100D30223 /* ProfilePage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,8 +164,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DD0C5D229B11DA400063FDE /* NavBar.swift in Sources */,
+				4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */,
+				4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */,
 				4DD0C5CE29B1194800063FDE /* WelcomePage.swift in Sources */,
 				4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */,
+				4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */,
 				4DA89C9729A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift in Sources */,
 				4DD0C5D029B11C9C00063FDE /* TotalsPage.swift in Sources */,
 			);

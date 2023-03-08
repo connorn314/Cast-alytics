@@ -12,12 +12,20 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            //        WelcomePage()
-            TotalsPage()
-//            Spacer()
+            switch selectedPage {
+            case .episodes:
+                EpisodesPage()
+            case .profile:
+                ProfilePage()
+            default:
+                TotalsPage()
+            }
+            Spacer()
             NavBar(selectedPage: $selectedPage)
-            
+                .frame(maxHeight: .infinity, alignment: .bottom)
         }
+        .padding(.horizontal)
+//        .ignoresSafeArea(.all, edges: .bottom)
 
     }
 }

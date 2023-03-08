@@ -14,78 +14,28 @@ enum Pages: Int {
 }
 struct NavBar: View {
     @Binding var selectedPage: Pages
+    
     var body: some View {
         HStack (alignment: .bottom) {
             Button {
-                print("overall")
+                print("Overall")
                 selectedPage = .overall
             } label: {
-                GeometryReader { geo in
-                    
-                    ZStack {
-                        if selectedPage == .overall {
-                            Rectangle()
-                                .frame(width: geo.size.width, height: geo.size.height/6)
-                                .foregroundColor(.blue)
-                            Text("left")
-                                .foregroundColor(.white)
-                        } else {
-                            Rectangle()
-                                .frame(width: geo.size.width, height: geo.size.height/6)
-                                .foregroundColor(.white)
-                            Text("left")
-                                .foregroundColor(.blue)
-                        }
-                        
-                    }
-                }
+                NavBarButton(buttonText: "Overall", isActive: (selectedPage == .overall))
             }
             Button {
                 print("episodes")
                 selectedPage = .episodes
             } label: {
-                GeometryReader { geo in
-                    
-                    ZStack {
-                        if selectedPage == .episodes {
-                            Rectangle()
-                                .frame(width: geo.size.width, height: geo.size.height/6)
-                                .foregroundColor(.blue)
-                            Text("episodes")
-                                .foregroundColor(.white)
-                        } else {
-                            Rectangle()
-                                .frame(width: geo.size.width, height: geo.size.height/6)
-                                .foregroundColor(.white)
-                            Text("episodes")
-                                .foregroundColor(.blue)
-                        }                    }
-                }
+                NavBarButton(buttonText: "Episodes", isActive: (selectedPage == .episodes))
             }
             Button {
                 print("profile")
                 selectedPage = .profile
             } label: {
-                GeometryReader { geo in
-                    
-                    ZStack {
-                        if selectedPage == .profile {
-                            Rectangle()
-                                .frame(width: geo.size.width, height: geo.size.height/6)
-                                .foregroundColor(.blue)
-                            Text("profile")
-                                .foregroundColor(.white)
-                        } else {
-                            Rectangle()
-                                .frame(width: geo.size.width, height: geo.size.height/6)
-                                .foregroundColor(.white)
-                            Text("profile")
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
+                NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile))
             }
-        }
+        }.frame(height: UIScreen.main.bounds.size.height/12)
     }
 }
 
