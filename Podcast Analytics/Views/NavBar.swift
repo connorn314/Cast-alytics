@@ -12,24 +12,50 @@ struct NavBar: View {
 //        ZStack {
             
             
-        HStack {
-            Text("Left")
-            Text("Middle")
-            Text("Right")
-        }
-        
-        NavigationStack {
-            List {
-                    NavigationLink("Mint", value: Color.mint)
-                    NavigationLink("Pink", value: Color.pink)
-                    NavigationLink("Teal", value: Color.teal)
+        HStack (alignment: .bottom) {
+            Button {
+                print("left")
+            } label: {
+                GeometryReader { geo in
+                    
+                    ZStack {
+                        Rectangle()
+                            .frame(width: geo.size.width, height: geo.size.height/6)
+                            .foregroundColor(.blue)
+                        Text("left")
+                            .foregroundColor(.white)
+                    }
                 }
-//                .navigationDestination(for: Color.self) { color in
-//                    ColorDetail(color: color)
-//                }
-                .navigationTitle("Colors")
+            }
+            Button {
+                print("middle")
+            } label: {
+                GeometryReader { geo in
+                    
+                    ZStack {
+                        Rectangle()
+                            .frame(width: geo.size.width, height: geo.size.height/6)
+                            .foregroundColor(.blue)
+                        Text("middle")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+            Button {
+                print("right")
+            } label: {
+                GeometryReader { geo in
+                    
+                    ZStack {
+                        Rectangle()
+                            .frame(width: geo.size.width, height: geo.size.height/6)
+                            .foregroundColor(.blue)
+                        Text("right")
+                            .foregroundColor(.white)
+                    }
+                }
+            }
         }
-//        }
     }
 }
 
