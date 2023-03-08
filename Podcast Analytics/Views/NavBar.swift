@@ -7,51 +7,81 @@
 
 import SwiftUI
 
+enum Pages: Int {
+    case overall = 0
+    case episodes = 1
+    case profile = 2
+}
 struct NavBar: View {
+    @Binding var selectedPage: Pages
     var body: some View {
-//        ZStack {
-            
-            
         HStack (alignment: .bottom) {
             Button {
-                print("left")
+                print("overall")
+                selectedPage = .overall
             } label: {
                 GeometryReader { geo in
                     
                     ZStack {
-                        Rectangle()
-                            .frame(width: geo.size.width, height: geo.size.height/6)
-                            .foregroundColor(.blue)
-                        Text("left")
-                            .foregroundColor(.white)
+                        if selectedPage == .overall {
+                            Rectangle()
+                                .frame(width: geo.size.width, height: geo.size.height/6)
+                                .foregroundColor(.blue)
+                            Text("left")
+                                .foregroundColor(.white)
+                        } else {
+                            Rectangle()
+                                .frame(width: geo.size.width, height: geo.size.height/6)
+                                .foregroundColor(.white)
+                            Text("left")
+                                .foregroundColor(.blue)
+                        }
+                        
                     }
                 }
             }
             Button {
-                print("middle")
+                print("episodes")
+                selectedPage = .episodes
             } label: {
                 GeometryReader { geo in
                     
                     ZStack {
-                        Rectangle()
-                            .frame(width: geo.size.width, height: geo.size.height/6)
-                            .foregroundColor(.blue)
-                        Text("middle")
-                            .foregroundColor(.white)
-                    }
+                        if selectedPage == .episodes {
+                            Rectangle()
+                                .frame(width: geo.size.width, height: geo.size.height/6)
+                                .foregroundColor(.blue)
+                            Text("episodes")
+                                .foregroundColor(.white)
+                        } else {
+                            Rectangle()
+                                .frame(width: geo.size.width, height: geo.size.height/6)
+                                .foregroundColor(.white)
+                            Text("episodes")
+                                .foregroundColor(.blue)
+                        }                    }
                 }
             }
             Button {
-                print("right")
+                print("profile")
+                selectedPage = .profile
             } label: {
                 GeometryReader { geo in
                     
                     ZStack {
-                        Rectangle()
-                            .frame(width: geo.size.width, height: geo.size.height/6)
-                            .foregroundColor(.blue)
-                        Text("right")
-                            .foregroundColor(.white)
+                        if selectedPage == .profile {
+                            Rectangle()
+                                .frame(width: geo.size.width, height: geo.size.height/6)
+                                .foregroundColor(.blue)
+                            Text("profile")
+                                .foregroundColor(.white)
+                        } else {
+                            Rectangle()
+                                .frame(width: geo.size.width, height: geo.size.height/6)
+                                .foregroundColor(.white)
+                            Text("profile")
+                                .foregroundColor(.blue)
+                        }
                     }
                 }
             }

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selectedPage: Pages = .overall
     var body: some View {
+        
         VStack {
             //        WelcomePage()
             TotalsPage()
 //            Spacer()
-            NavBar()
+            NavBar(selectedPage: $selectedPage)
             
         }
 
