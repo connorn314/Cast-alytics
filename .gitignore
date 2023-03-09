@@ -44,7 +44,7 @@ Swift.gitignore
 xcuserdata/
 
 ## User keys
-/Podcast Analytics/SecureKeys.xcconfig
+SecureKeys.*
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
