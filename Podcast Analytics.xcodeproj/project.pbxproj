@@ -24,6 +24,7 @@
 		4D622B8A29B9436000D30223 /* EpisodesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesPage.swift; sourceTree = "<group>"; };
 		4D622B8C29B943B100D30223 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		4DA373F429BA572200FBB001 /* SecureKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecureKeys.xcconfig; sourceTree = "<group>"; };
+		4DA373F529BA671200FBB001 /* Podcast-Analytics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Podcast-Analytics-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4DA89C9329A6BC5D00B0EA15 /* Podcast Analytics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Podcast Analytics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast_AnalyticsApp.swift; sourceTree = "<group>"; };
 		4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		4DA89C9529A6BC5D00B0EA15 /* Podcast Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				4DA373F529BA671200FBB001 /* Podcast-Analytics-Info.plist */,
 				4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */,
 				4DD0C5CC29B1192800063FDE /* Views */,
 				4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */,
@@ -181,6 +183,7 @@
 /* Begin XCBuildConfiguration section */
 		4DA89C9F29A6BC6400B0EA15 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DA373F429BA572200FBB001 /* SecureKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -295,6 +298,7 @@
 		};
 		4DA89CA229A6BC6400B0EA15 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DA373F429BA572200FBB001 /* SecureKeys.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -303,6 +307,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Podcast Analytics/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Podcast-Analytics-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -331,6 +336,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Podcast Analytics/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Podcast-Analytics-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

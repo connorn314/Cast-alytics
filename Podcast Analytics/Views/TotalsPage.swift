@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct TotalsPage: View {
+    
+    
     var body: some View {
         Text("Hello, World! I'm the Totals Page")
+//        Text(apiKey)
     }
 }
 

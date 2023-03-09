@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedPage: Pages = .overall
+    var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
+    
     var body: some View {
         
         VStack {
