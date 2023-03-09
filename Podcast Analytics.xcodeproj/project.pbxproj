@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D54C5BE29BA98600046AC29 /* AllEpisodesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D54C5BD29BA98600046AC29 /* AllEpisodesData.swift */; };
 		4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8629B9415100D30223 /* NavBarButton.swift */; };
 		4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8A29B9436000D30223 /* EpisodesPage.swift */; };
 		4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8C29B943B100D30223 /* ProfilePage.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D54C5BD29BA98600046AC29 /* AllEpisodesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEpisodesData.swift; sourceTree = "<group>"; };
 		4D622B8629B9415100D30223 /* NavBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarButton.swift; sourceTree = "<group>"; };
 		4D622B8A29B9436000D30223 /* EpisodesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesPage.swift; sourceTree = "<group>"; };
 		4D622B8C29B943B100D30223 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
@@ -46,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D54C5BC29BA981F0046AC29 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4D54C5BD29BA98600046AC29 /* AllEpisodesData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		4DA89C8A29A6BC5D00B0EA15 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +77,7 @@
 			children = (
 				4DA373F529BA671200FBB001 /* Podcast-Analytics-Info.plist */,
 				4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */,
+				4D54C5BC29BA981F0046AC29 /* Models */,
 				4DD0C5CC29B1192800063FDE /* Views */,
 				4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */,
 				4DA373F429BA572200FBB001 /* SecureKeys.xcconfig */,
@@ -171,6 +182,7 @@
 				4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */,
 				4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */,
 				4DD0C5CE29B1194800063FDE /* WelcomePage.swift in Sources */,
+				4D54C5BE29BA98600046AC29 /* AllEpisodesData.swift in Sources */,
 				4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */,
 				4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */,
 				4DA89C9729A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift in Sources */,

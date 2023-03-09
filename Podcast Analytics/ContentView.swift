@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedPage: Pages = .overall
-    var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
+    @State var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
     
     var body: some View {
         
@@ -20,7 +20,7 @@ struct ContentView: View {
             case .profile:
                 ProfilePage()
             default:
-                TotalsPage()
+                TotalsPage(apiKey: apiKey, total: 1)
             }
             Spacer()
             NavBar(selectedPage: $selectedPage)
