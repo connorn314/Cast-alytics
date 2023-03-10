@@ -16,11 +16,11 @@ struct ContentView: View {
         VStack {
             switch selectedPage {
             case .episodes:
-                EpisodesPage()
+                EpisodesPage(apiKey: apiKey, total: 0)
             case .profile:
                 ProfilePage()
             default:
-                TotalsPage(apiKey: apiKey, total: 1)
+                TotalsPage(apiKey: apiKey)
             }
             Spacer()
             NavBar(selectedPage: $selectedPage)
