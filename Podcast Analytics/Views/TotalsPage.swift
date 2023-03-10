@@ -15,7 +15,7 @@ struct TotalsPage: View {
 //    let urlRequest = URLRequest(url: apiUrl)
     
     @State var total: Int
-    var fullObject: EpisodesData? = nil
+    @State var fullObject: EpisodesData? = nil
     
     func fetchEpisodesData() async {
         var urlRequest = URLRequest(url: apiUrl)
@@ -25,25 +25,35 @@ struct TotalsPage: View {
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
         let decodedResponse = try? JSONDecoder().decode(EpisodesData.self, from: data)
         total = decodedResponse?.count ?? 0
-//        fullObject = decodedResponse!
+        fullObject = decodedResponse!
 //        return decodedResponse!
     }
 
     
     var body: some View {
         Text("Hello, World! I'm the Totals Page")
-        Text("\(total)")
+        Text("Number of Episodes: \(total)")
+        
+//        Text("\(fullObject?.collection[0].downloads.total ?? 1000)")
         Button(action: {
             print("started")
         }, label: {
             Text("refresh")
         })
-            .task {
-                do {
-                    await fetchEpisodesData()
-                }
+        .task {
+            do {
+                await fetchEpisodesData()
             }
-
+        }
+//        NavigationView {
+        List(fullObject?.collection ?? []) { episode in
+            Text("Episode #\(episode.number ) --> Downloads: \(episode.downloads.total )")
+        }
+        .refreshable {
+             await fetchEpisodesData()
+         }
+//             .navigationTitle("Episodes")
+//        }
     }
 }
 

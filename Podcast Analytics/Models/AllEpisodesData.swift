@@ -16,7 +16,7 @@ struct EpisodesData: Codable {
 }
 
 
-struct Collection: Codable {
+struct Collection: Codable, Identifiable {
     let href: String
     let type, title: String
     let season: Season
