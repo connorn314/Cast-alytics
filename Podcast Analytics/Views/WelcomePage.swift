@@ -8,32 +8,43 @@
 import SwiftUI
 
 struct WelcomePage: View {
+    @State var welcomeShowing: Bool
     var body: some View {
-        ZStack {
-            Color(.systemYellow)
-            VStack {
-                Text("Hello, Connor and Kirk!")
-                    .foregroundColor(.white)
-                    .dynamicTypeSize(.xLarge)
-                Text("Welcome to your Corner")
-                    .foregroundColor(.white)
-                    .dynamicTypeSize(.xLarge)
-                
-                Button {
-                    print("button pressed")
-                } label: {
-                    Text("See Analytics ->")
-                        .foregroundColor(.white)
+        if welcomeShowing {
+            ZStack {
+                Color.primary.ignoresSafeArea()
+                Color(red: 235, green: 238, blue: 252)
+                VStack {
+                    
+                    Spacer()
+                    Spacer()
+                    Text("Simplecast")
+                        .foregroundColor(.primary)
                         .dynamicTypeSize(.xxxLarge)
-                        .font(.headline)
-                        .padding(.all, 20.0)
-                        .border(.white)
-                        .buttonBorderShape(.roundedRectangle)
+                        .font(.largeTitle)
+                    
+//                    Spacer()
+                    Button {
+                        print("button pressed")
+                        welcomeShowing.toggle()
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 40)
+                                .foregroundColor(.primary)
+                                .frame(maxWidth: 200, maxHeight: 80)
+                            Text("See Analytics")
+                                .foregroundColor(.white)
+                                .dynamicTypeSize(.xxLarge)
+                                .font(.headline)
+                                .padding(.all, 20.0)
+                        }
+                    }
+                    Spacer()
+                    Spacer()
+                    
                 }
-                
-
+                .padding()
             }
-            .padding()
         }
         
     }
