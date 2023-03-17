@@ -35,7 +35,8 @@ struct NavBar: View {
             } label: {
                 NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile))
             }
-        }.frame(height: UIScreen.main.bounds.size.height/12)
+        }.frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/12)
+            .border(.blue)
     }
 }
 

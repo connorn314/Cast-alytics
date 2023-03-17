@@ -15,22 +15,12 @@ struct NavBarButton: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                if isActive {
-                    RoundedRectangle(cornerRadius: 20.0, style: .circular)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .foregroundColor(.blue)
-                    Text(buttonText)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                } else {
-                    RoundedRectangle(cornerRadius: 20.0, style: .circular)
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .foregroundColor(.white)
-                    Text(buttonText)
-                        .font(.title2)
-                        .foregroundColor(.blue)
-                }
-                
+                Rectangle()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .foregroundColor(isActive ? .black : .white)
+                Text(buttonText)
+                    .font(.title2)
+                    .foregroundColor(isActive ? .white : .black)
             }
         }
     }

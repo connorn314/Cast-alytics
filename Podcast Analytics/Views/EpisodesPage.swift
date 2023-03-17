@@ -7,6 +7,24 @@
 
 import SwiftUI
 
+enum FetchError: Error {
+    case failedContact
+    case statusCode
+    case decodeFailed
+    
+    var description: String {
+        switch self {
+        case .failedContact:
+            return "Problem with API request, unable to retrieve data"
+        case .statusCode:
+            return "Status code for response was not 200"
+        case .decodeFailed:
+            return "Failed to decode JSON response"
+        }
+        
+    }
+}
+
 struct EpisodesPage: View {
     
     var apiKey: String
@@ -14,31 +32,54 @@ struct EpisodesPage: View {
     
     @State var total: Int = 0
     @State var fullObject: EpisodesData? = nil
+    @State private var errorShowing: Bool = false
+    @State private var errorMessage: String = ""
     
-    func fetchEpisodesData() async {
+    
+    func fetchEpisodesData() async throws {
         var urlRequest = URLRequest(url: apiUrl)
-
         urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        let (data, response) = try! await URLSession.shared.data(for: urlRequest)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-        let decodedResponse = try? JSONDecoder().decode(EpisodesData.self, from: data)
-        total = decodedResponse?.count ?? 0
-        fullObject = decodedResponse!
+        
+        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
+            throw FetchError.failedContact
+        }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            throw FetchError.statusCode
+        }
+        guard let decodedResponse = try? JSONDecoder().decode(EpisodesData.self, from: data) else {
+            throw FetchError.decodeFailed
+        }
+        
+        total = decodedResponse.count
+        fullObject = decodedResponse
     }
     
     var body: some View {
         Text("I am the Episodes Page!")
         .task {
             do {
-                await fetchEpisodesData()
+                try await fetchEpisodesData()
+            } catch let myError as FetchError {
+                errorShowing.toggle()
+                errorMessage = myError.description
+            } catch {
+                errorShowing.toggle()
+                errorMessage = error.localizedDescription
             }
+        }
+        .alert(isPresented: $errorShowing) {
+            Alert(
+                title: Text("Important message"),
+                message: Text(errorMessage),
+                dismissButton: .default(Text("Got it!"))
+            )
         }
         List(fullObject?.collection ?? []) { episode in
             Text("Episode #\(episode.number ) --> Downloads: \(episode.downloads.total )")
         }
-        .refreshable {
-             await fetchEpisodesData()
-         }
+//        .refreshable {
+//             await fetchEpisodesData()
+//         }
     }
 }
 

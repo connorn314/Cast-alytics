@@ -9,24 +9,36 @@ import SwiftUI
 
 struct WelcomePage: View {
     @State var welcomeShowing: Bool
+    @State var selectedPage: Pages = .overall
+    @State var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
+    
     var body: some View {
-        if welcomeShowing {
+        NavigationView {
             ZStack {
                 Color.primary.ignoresSafeArea()
                 Color(red: 235, green: 238, blue: 252)
                 VStack {
-                    
                     Spacer()
                     Spacer()
                     Text("Simplecast")
                         .foregroundColor(.primary)
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle)
-                    
-//                    Spacer()
-                    Button {
-                        print("button pressed")
-                        welcomeShowing.toggle()
+                    NavigationLink {
+                       VStack {
+                           switch selectedPage {
+                           case .episodes:
+                               EpisodesPage(apiKey: apiKey, total: 0)
+                           case .profile:
+                               ProfilePage()
+                           default:
+                               TotalsPage(apiKey: apiKey)
+                           }
+                           Spacer()
+                           NavBar(selectedPage: $selectedPage)
+                               .frame(maxHeight: .infinity, alignment: .bottom)
+                       }
+                       .padding(.horizontal)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 40)
@@ -46,6 +58,9 @@ struct WelcomePage: View {
                 .padding()
             }
         }
+//        if welcomeShowing {
+            
+//        }
         
     }
 }
