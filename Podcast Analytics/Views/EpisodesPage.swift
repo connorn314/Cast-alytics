@@ -30,7 +30,7 @@ struct EpisodesPage: View {
     var apiKey: String
     var apiUrl: URL = URL(string: "https://api.simplecast.com/analytics/episodes?podcast=cdeac5f4-4d81-4626-9b04-03170af3ecf8")!
     
-    @State var total: Int = 0
+//    @State var total: Int = 0
     @State var fullObject: EpisodesData? = nil
     @State private var errorShowing: Bool = false
     @State private var errorMessage: String = ""
@@ -50,12 +50,20 @@ struct EpisodesPage: View {
             throw FetchError.decodeFailed
         }
         
-        total = decodedResponse.count
+//        total = decodedResponse.count
         fullObject = decodedResponse
     }
     
     var body: some View {
-        Text("I am the Episodes Page!")
+//        Text("I am the Episodes Page!")
+        ScrollView {
+            LazyVStack {
+                ForEach(fullObject?.collection ?? []) { episode in
+        //            Text("Episode #\(episode.number ) --> Downloads: \(episode.downloads.total )")
+                    EpisodeListIndexItem(title: episode.title, episodeNumber: episode.number, downloads: episode.downloads.total)
+                }
+            }
+        }
         .task {
             do {
                 try await fetchEpisodesData()
@@ -74,12 +82,7 @@ struct EpisodesPage: View {
                 dismissButton: .default(Text("Got it!"))
             )
         }
-        List(fullObject?.collection ?? []) { episode in
-            Text("Episode #\(episode.number ) --> Downloads: \(episode.downloads.total )")
-        }
-//        .refreshable {
-//             await fetchEpisodesData()
-//         }
+        
     }
 }
 

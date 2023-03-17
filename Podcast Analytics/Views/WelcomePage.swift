@@ -25,7 +25,7 @@ struct WelcomePage: View {
                         .dynamicTypeSize(.xxxLarge)
                         .font(.largeTitle)
                     NavigationLink {
-                       VStack {
+                       ZStack {
                            switch selectedPage {
                            case .episodes:
                                EpisodesPage(apiKey: apiKey, total: 0)
@@ -34,11 +34,11 @@ struct WelcomePage: View {
                            default:
                                TotalsPage(apiKey: apiKey)
                            }
-                           Spacer()
+//                           Spacer()
                            NavBar(selectedPage: $selectedPage)
                                .frame(maxHeight: .infinity, alignment: .bottom)
                        }
-                       .padding(.horizontal)
+//                       .padding(.horizontal)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 40)

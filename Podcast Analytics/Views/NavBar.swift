@@ -12,11 +12,12 @@ enum Pages: Int {
     case episodes = 1
     case profile = 2
 }
+
 struct NavBar: View {
     @Binding var selectedPage: Pages
     
     var body: some View {
-        HStack (alignment: .bottom) {
+        HStack (alignment: .bottom, spacing: 0) {
             Button {
                 print("Overall")
                 selectedPage = .overall
@@ -28,6 +29,8 @@ struct NavBar: View {
                 selectedPage = .episodes
             } label: {
                 NavBarButton(buttonText: "Episodes", isActive: (selectedPage == .episodes))
+                    .overlay(Divider(), alignment: .leading)
+                    .overlay(Divider(), alignment: .trailing)
             }
             Button {
                 print("profile")
@@ -36,7 +39,7 @@ struct NavBar: View {
                 NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile))
             }
         }.frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/12)
-            .border(.blue)
+        
     }
 }
 
