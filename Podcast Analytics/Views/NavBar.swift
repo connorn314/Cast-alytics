@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum Pages: Int {
-    case overall = 0
-    case episodes = 1
-    case profile = 2
-}
-
 struct NavBar: View {
     @Binding var selectedPage: Pages
     

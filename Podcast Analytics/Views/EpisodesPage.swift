@@ -35,30 +35,6 @@ struct EpisodesPage: View {
     @State private var errorShowing: Bool = false
     @State private var errorMessage: String = ""
     
-    
-//    func fetchEpisodesData(url: URL, apiKey: String) async throws -> EpisodesData {
-//        var urlRequest = URLRequest(url: apiUrl)
-//        urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-//        
-//        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
-//            throw FetchError.failedContact
-//        }
-//        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-//            throw FetchError.statusCode
-//        }
-//        let decoder = JSONDecoder()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        JSONDecoder.DateDecodingStrategy.formatted(formatter)
-//        
-//        guard let decodedResponse = try? decoder.decode(EpisodesData.self, from: data) else {
-//            throw FetchError.decodeFailed
-//        }
-//        
-////        total = decodedResponse.count
-////        fullObject = decodedResponse
-//    }
-    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -79,6 +55,7 @@ struct EpisodesPage: View {
                         }
                     }
                 }
+                .navigationTitle("Episode Analytics")
             }
             .task {
                 do {
