@@ -36,53 +36,69 @@ struct EpisodesPage: View {
     @State private var errorMessage: String = ""
     
     
-    func fetchEpisodesData() async throws {
-        var urlRequest = URLRequest(url: apiUrl)
-        urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
-        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
-            throw FetchError.failedContact
-        }
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw FetchError.statusCode
-        }
-        guard let decodedResponse = try? JSONDecoder().decode(EpisodesData.self, from: data) else {
-            throw FetchError.decodeFailed
-        }
-        
-//        total = decodedResponse.count
-        fullObject = decodedResponse
-    }
+//    func fetchEpisodesData(url: URL, apiKey: String) async throws -> EpisodesData {
+//        var urlRequest = URLRequest(url: apiUrl)
+//        urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        
+//        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
+//            throw FetchError.failedContact
+//        }
+//        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+//            throw FetchError.statusCode
+//        }
+//        let decoder = JSONDecoder()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        JSONDecoder.DateDecodingStrategy.formatted(formatter)
+//        
+//        guard let decodedResponse = try? decoder.decode(EpisodesData.self, from: data) else {
+//            throw FetchError.decodeFailed
+//        }
+//        
+////        total = decodedResponse.count
+////        fullObject = decodedResponse
+//    }
     
     var body: some View {
-//        Text("I am the Episodes Page!")
-        ScrollView {
-            LazyVStack {
-                ForEach(fullObject?.collection ?? []) { episode in
-        //            Text("Episode #\(episode.number ) --> Downloads: \(episode.downloads.total )")
-                    EpisodeListIndexItem(title: episode.title, episodeNumber: episode.number, downloads: episode.downloads.total)
+        NavigationView {
+            ScrollView {
+                LazyVStack {
+                    ForEach(fullObject?.collection ?? []) { episode in
+                        NavigationLink {
+                            VStack {
+                                Spacer()
+                                Text("Episode: \(episode.number)")
+                                Text("Special Analytics")
+                                Spacer()
+                            }
+                        } label: {
+                            EpisodeListIndexItem(title: episode.title,
+                                                 episodeNumber: episode.number,
+                                                 formattedDate: episode.formattedPublishDate,
+                                                 downloads: episode.downloads.total)
+                        }
+                    }
                 }
             }
-        }
-        .task {
-            do {
-                try await fetchEpisodesData()
-            } catch let myError as FetchError {
-                errorShowing.toggle()
-                errorMessage = myError.description
-            } catch {
-                errorShowing.toggle()
-                errorMessage = error.localizedDescription
+            .task {
+                do {
+                    fullObject = try await fetchEpisodesData(url: apiUrl, apiKey: apiKey)
+                } catch let myError as FetchError {
+                    errorShowing.toggle()
+                    errorMessage = myError.description
+                } catch {
+                    errorShowing.toggle()
+                    errorMessage = error.localizedDescription
+                }
+            }
+            .alert(isPresented: $errorShowing) {
+                Alert(
+                    title: Text("Important message"),
+                    message: Text(errorMessage),
+                    dismissButton: .default(Text("Got it!"))
+                )
             }
         }
-        .alert(isPresented: $errorShowing) {
-            Alert(
-                title: Text("Important message"),
-                message: Text(errorMessage),
-                dismissButton: .default(Text("Got it!"))
-            )
-        }
-        
     }
 }
 

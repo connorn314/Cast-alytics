@@ -20,10 +20,15 @@ struct Collection: Codable, Identifiable {
     let href: String
     let type, title: String
     let season: Season
-    let publishedAt: String
+    let publishedAt: Date
     let number: Int
     let id: String
     let downloads: Downloads
+    
+    var formattedPublishDate: String {
+        publishedAt.formatted(date: .abbreviated, time: .shortened)
+    }
+
 
     enum CodingKeys: String, CodingKey {
         case href, type, title, season

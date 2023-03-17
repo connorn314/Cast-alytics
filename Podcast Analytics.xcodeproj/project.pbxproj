@@ -11,6 +11,7 @@
 		4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8629B9415100D30223 /* NavBarButton.swift */; };
 		4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8A29B9436000D30223 /* EpisodesPage.swift */; };
 		4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D622B8C29B943B100D30223 /* ProfilePage.swift */; };
+		4D8C7BC929C5138E003D45C9 /* BasicFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C7BC829C5138E003D45C9 /* BasicFetch.swift */; };
 		4D93BAD129C4E6E20030BCDB /* EpisodeListIndexItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93BAD029C4E6E20030BCDB /* EpisodeListIndexItem.swift */; };
 		4DA89C9729A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */; };
 		4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */; };
@@ -26,6 +27,7 @@
 		4D622B8629B9415100D30223 /* NavBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarButton.swift; sourceTree = "<group>"; };
 		4D622B8A29B9436000D30223 /* EpisodesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesPage.swift; sourceTree = "<group>"; };
 		4D622B8C29B943B100D30223 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		4D8C7BC829C5138E003D45C9 /* BasicFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFetch.swift; sourceTree = "<group>"; };
 		4D93BAD029C4E6E20030BCDB /* EpisodeListIndexItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListIndexItem.swift; sourceTree = "<group>"; };
 		4DA373F429BA572200FBB001 /* SecureKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecureKeys.xcconfig; sourceTree = "<group>"; };
 		4DA373F529BA671200FBB001 /* Podcast-Analytics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Podcast-Analytics-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -79,6 +81,7 @@
 			children = (
 				4DA373F529BA671200FBB001 /* Podcast-Analytics-Info.plist */,
 				4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */,
+				4D8C7BC829C5138E003D45C9 /* BasicFetch.swift */,
 				4D54C5BC29BA981F0046AC29 /* Models */,
 				4DD0C5CC29B1192800063FDE /* Views */,
 				4DA89C9829A6BC5D00B0EA15 /* ContentView.swift */,
@@ -185,6 +188,7 @@
 				4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */,
 				4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */,
 				4DD0C5CE29B1194800063FDE /* WelcomePage.swift in Sources */,
+				4D8C7BC929C5138E003D45C9 /* BasicFetch.swift in Sources */,
 				4D54C5BE29BA98600046AC29 /* AllEpisodesData.swift in Sources */,
 				4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */,
 				4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */,

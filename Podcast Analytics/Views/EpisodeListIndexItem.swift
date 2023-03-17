@@ -11,6 +11,7 @@ struct EpisodeListIndexItem: View {
 //    @State private var id: String = "abc"
     @State var title: String
     @State var episodeNumber: Int
+    @State var formattedDate: String
     @State var downloads: Int
 //    @State private var publishedAt: String = "Tuesday"
     
@@ -19,8 +20,15 @@ struct EpisodeListIndexItem: View {
             ZStack {
                 Color.blue.opacity(0.05)
                 HStack (alignment: .top) {
-                    Text("\(episodeNumber). \(title)")
-                        .font(.headline)
+                    VStack (alignment: .leading) {
+                        Text("\(episodeNumber). \(title)")
+                            .font(.headline)
+                        Spacer()
+                        Text("Date Published: \(formattedDate)")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    
                     Spacer()
                     Text(String(downloads))
                         .font(.headline)

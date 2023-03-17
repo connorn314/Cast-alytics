@@ -28,17 +28,15 @@ struct WelcomePage: View {
                        ZStack {
                            switch selectedPage {
                            case .episodes:
-                               EpisodesPage(apiKey: apiKey, total: 0)
+                               EpisodesPage(apiKey: apiKey)
                            case .profile:
                                ProfilePage()
                            default:
                                TotalsPage(apiKey: apiKey)
                            }
-//                           Spacer()
                            NavBar(selectedPage: $selectedPage)
                                .frame(maxHeight: .infinity, alignment: .bottom)
                        }
-//                       .padding(.horizontal)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 40)
@@ -53,15 +51,10 @@ struct WelcomePage: View {
                     }
                     Spacer()
                     Spacer()
-                    
                 }
                 .padding()
             }
         }
-//        if welcomeShowing {
-            
-//        }
-        
     }
 }
 

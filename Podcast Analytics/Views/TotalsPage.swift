@@ -18,7 +18,7 @@ struct TotalsPage: View {
             ScrollView (.vertical) {
                 LazyVStack (spacing: 15) {
                     ForEach(0..<10) { _ in
-                        EpisodeListIndexItem(title: "Connor and Kirk and Dehner", episodeNumber: 15, downloads: 85)
+                        EpisodeListIndexItem(title: "Connor and Kirk and Dehner", episodeNumber: 15, formattedDate: "Mar 1, 1999", downloads: 85)
                     }
                 }
             }
