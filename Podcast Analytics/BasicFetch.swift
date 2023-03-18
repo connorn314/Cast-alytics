@@ -7,6 +7,24 @@
 
 import Foundation
 
+enum FetchError: Error {
+    case failedContact
+    case statusCode
+    case decodeFailed
+    
+    var description: String {
+        switch self {
+        case .failedContact:
+            return "Problem with API request, unable to retrieve data"
+        case .statusCode:
+            return "Status code for response was not 200"
+        case .decodeFailed:
+            return "Failed to decode JSON response"
+        }
+        
+    }
+}
+
 func fetchEpisodesData(url: URL, apiKey: String) async throws -> EpisodesData {
     var urlRequest = URLRequest(url: url)
     urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")

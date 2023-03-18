@@ -15,12 +15,12 @@ enum Pages: Int {
 }
 
 struct ContentView: View {
+    
     @State var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
     @State var selectedPage: Pages = .welcome
-//    @State var welcomeShowing: Bool = true
     
     var body: some View {
-//        WelcomePage(welcomeShowing: welcomeShowing)
+
         switch selectedPage {
         case .welcome:
             WelcomePage(selectedPage: $selectedPage, apiKey: apiKey)

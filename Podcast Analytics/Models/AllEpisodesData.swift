@@ -12,7 +12,7 @@ struct EpisodesData: Codable {
     let total: Int
     let pages: JPages
     let count: Int
-    let collection: [Collection]
+    var collection: [Collection]
 }
 
 

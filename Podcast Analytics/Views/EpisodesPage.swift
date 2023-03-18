@@ -7,23 +7,7 @@
 
 import SwiftUI
 
-enum FetchError: Error {
-    case failedContact
-    case statusCode
-    case decodeFailed
-    
-    var description: String {
-        switch self {
-        case .failedContact:
-            return "Problem with API request, unable to retrieve data"
-        case .statusCode:
-            return "Status code for response was not 200"
-        case .decodeFailed:
-            return "Failed to decode JSON response"
-        }
-        
-    }
-}
+
 
 struct EpisodesPage: View {
     
@@ -34,6 +18,7 @@ struct EpisodesPage: View {
     @State var fullObject: EpisodesData? = nil
     @State private var errorShowing: Bool = false
     @State private var errorMessage: String = ""
+    @State var next: String = ""
     
     var body: some View {
         NavigationView {
@@ -54,12 +39,33 @@ struct EpisodesPage: View {
                                                  downloads: episode.downloads.total)
                         }
                     }
+                    if next != "" {
+                        Text(next)
+                            .onAppear {
+                                Task {
+                                    do {
+                                        let responseObject = try await fetchEpisodesData(url: URL(string: next)!, apiKey: apiKey)
+                                        fullObject?.collection.append(contentsOf: responseObject.collection)
+                                        next = responseObject.pages.next.href
+                                    } catch let myError as FetchError {
+                                        errorShowing.toggle()
+                                        errorMessage = myError.description
+                                    } catch {
+                                        errorShowing.toggle()
+                                        errorMessage = error.localizedDescription
+                                    }
+                                }
+                            }
+                    }
+                    
                 }
                 .navigationTitle("Episode Analytics")
             }
             .task {
                 do {
                     fullObject = try await fetchEpisodesData(url: apiUrl, apiKey: apiKey)
+                    next = fullObject?.pages.next.href ?? "no next url found"
+                    
                 } catch let myError as FetchError {
                     errorShowing.toggle()
                     errorMessage = myError.description
