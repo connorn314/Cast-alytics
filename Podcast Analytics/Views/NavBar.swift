@@ -13,24 +13,21 @@ struct NavBar: View {
     var body: some View {
         HStack (alignment: .bottom, spacing: 0) {
             Button {
-                print("Overall")
                 selectedPage = .overall
             } label: {
-                NavBarButton(buttonText: "Overall", isActive: (selectedPage == .overall))
+                NavBarButton(buttonText: "Home", isActive: (selectedPage == .overall), buttonImage: "house")
             }
             Button {
-                print("episodes")
                 selectedPage = .episodes
             } label: {
-                NavBarButton(buttonText: "Episodes", isActive: (selectedPage == .episodes))
+                NavBarButton(buttonText: "Analytics", isActive: (selectedPage == .episodes), buttonImage: "chart.bar")
                     .overlay(Divider(), alignment: .leading)
                     .overlay(Divider(), alignment: .trailing)
             }
             Button {
-                print("profile")
                 selectedPage = .profile
             } label: {
-                NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile))
+                NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile), buttonImage: "person")
             }
         }.frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/12)
         

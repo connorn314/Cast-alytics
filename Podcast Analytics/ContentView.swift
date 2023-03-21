@@ -20,26 +20,25 @@ struct ContentView: View {
     @State var selectedPage: Pages = .welcome
     
     var body: some View {
-
-        switch selectedPage {
-        case .welcome:
-            WelcomePage(selectedPage: $selectedPage, apiKey: apiKey)
-        default:
-            ZStack {
+        ZStack {
+            if selectedPage == .welcome {
+                WelcomePage(selectedPage: $selectedPage, apiKey: apiKey)
+                    .border(.blue)
+            } else {
                switch selectedPage {
                case .episodes:
                    EpisodesPage()
+                       .border(.blue)
                case .profile:
                    ProfilePage()
+//                       .border(.blue)
                default:
                    TotalsPage()
                }
                NavBar(selectedPage: $selectedPage)
                    .frame(maxHeight: .infinity, alignment: .bottom)
-           }
+            }
         }
-        
-         
     }
 }
 

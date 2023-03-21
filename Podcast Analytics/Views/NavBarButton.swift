@@ -11,6 +11,7 @@ struct NavBarButton: View {
     
     var buttonText: String
     var isActive: Bool
+    var buttonImage: String
     
     var body: some View {
         GeometryReader { geo in
@@ -18,11 +19,15 @@ struct NavBarButton: View {
                 Rectangle()
                     .frame(width: geo.size.width, height: geo.size.height)
                     .foregroundColor(isActive ? Color.theme.accent : Color.theme.background)
-                Text(buttonText)
-                    .font(.title2)
-                    .foregroundColor(isActive ? Color.theme.background : Color.theme.accent)
+                VStack {
+                    Image(systemName: buttonImage)
+                    Text(buttonText)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                }
+                .foregroundColor(isActive ? Color.theme.background : Color.theme.accent)
             }
-        }
+        }.ignoresSafeArea()
     }
 }
 

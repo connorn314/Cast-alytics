@@ -14,7 +14,6 @@ struct SingleEpisodeAnalytics: View {
     
     var body: some View {
         ZStack {
-//            Color.theme.fun
             VStack {
                 Spacer()
                 Text("Episode: \(number)")
