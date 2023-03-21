@@ -40,7 +40,8 @@ struct EpisodesPage: View {
                         }
                     }
                     if next != "" {
-                        Text(next)
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
                             .onAppear {
                                 Task {
                                     do {
@@ -60,6 +61,7 @@ struct EpisodesPage: View {
                     
                 }
                 .navigationTitle("Episode Analytics")
+//                .foregroundColor(.accentColor)
             }
             .task {
                 do {

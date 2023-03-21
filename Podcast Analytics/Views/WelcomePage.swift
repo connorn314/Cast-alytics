@@ -12,14 +12,14 @@ struct WelcomePage: View {
     @State var apiKey: String
     
     var body: some View {
-        ZStack {
-            Color.primary.ignoresSafeArea()
-            Color(red: 235, green: 238, blue: 252)
+//        ZStack {
+//            Color.primary.ignoresSafeArea()
             VStack {
                 Spacer()
                 Spacer()
                 Text("Simplecast")
-                    .foregroundColor(.primary)
+                    .foregroundColor(.accentColor)
+                    .foregroundStyle(.primary)
                     .dynamicTypeSize(.xxxLarge)
                     .font(.largeTitle)
                 Button {
@@ -27,20 +27,21 @@ struct WelcomePage: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 40)
-                            .foregroundColor(.primary)
+                            .foregroundStyle(.tertiary)
                             .frame(maxWidth: 200, maxHeight: 80)
                         Text("See Analytics")
-                            .foregroundColor(.white)
+                            .foregroundStyle(.primary)
                             .dynamicTypeSize(.xxLarge)
                             .font(.headline)
                             .padding(.all, 20.0)
                     }
+                    .foregroundColor(.accentColor)
                 }
                 Spacer()
                 Spacer()
             }
             .padding()
-        }
+//        }
     }
 }
 

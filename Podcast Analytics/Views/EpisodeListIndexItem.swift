@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct EpisodeListIndexItem: View {
-//    @State private var id: String = "abc"
+
     @State var title: String
     @State var episodeNumber: Int
     @State var formattedDate: String
     @State var downloads: Int
-//    @State private var publishedAt: String = "Tuesday"
     
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                Color.blue.opacity(0.05)
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color.theme.secondBackground)
                 HStack (alignment: .top) {
                     VStack (alignment: .leading) {
                         Text("\(episodeNumber). \(title)")
                             .font(.headline)
+                            .foregroundStyle(.primary)
                         Spacer()
                         Text("Date Published: \(formattedDate)")
                             .font(.subheadline)
+                            .foregroundStyle(.secondary)
                         Spacer()
-                    }
+                    }.foregroundColor(Color.theme.accent)
                     
                     Spacer()
                     Text(String(downloads))
@@ -38,7 +40,6 @@ struct EpisodeListIndexItem: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .frame(height: 100)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 

@@ -17,10 +17,10 @@ struct NavBarButton: View {
             ZStack {
                 Rectangle()
                     .frame(width: geo.size.width, height: geo.size.height)
-                    .foregroundColor(isActive ? .black : .white)
+                    .foregroundColor(isActive ? Color.theme.accent : Color.theme.background)
                 Text(buttonText)
                     .font(.title2)
-                    .foregroundColor(isActive ? .white : .black)
+                    .foregroundColor(isActive ? Color.theme.background : Color.theme.accent)
             }
         }
     }
