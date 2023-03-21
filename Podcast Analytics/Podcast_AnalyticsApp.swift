@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Podcast_AnalyticsApp: App {
+    
+    @StateObject private var edvm: EpisodeDataViewModel = EpisodeDataViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(edvm)
         }
     }
 }

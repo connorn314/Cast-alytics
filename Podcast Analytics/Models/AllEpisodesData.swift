@@ -10,7 +10,7 @@ import Foundation
 struct EpisodesData: Codable {
     let href: String
     let total: Int
-    let pages: JPages
+    var pages: JPages
     let count: Int
     var collection: [Collection]
 }
@@ -50,10 +50,10 @@ struct Season: Codable {
 
 struct JPages: Codable {
     let total: Int
-    let previous, next: Next
+    var previous, next: Next
     let limit, current: Int
 }
 
 struct Next: Codable {
-    let href: String
+    var href: String
 }

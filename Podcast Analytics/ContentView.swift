@@ -28,11 +28,11 @@ struct ContentView: View {
             ZStack {
                switch selectedPage {
                case .episodes:
-                   EpisodesPage(apiKey: apiKey)
+                   EpisodesPage()
                case .profile:
                    ProfilePage()
                default:
-                   TotalsPage(apiKey: apiKey)
+                   TotalsPage()
                }
                NavBar(selectedPage: $selectedPage)
                    .frame(maxHeight: .infinity, alignment: .bottom)

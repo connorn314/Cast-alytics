@@ -7,31 +7,20 @@
 
 import SwiftUI
 
-
-
 struct EpisodesPage: View {
     
-    var apiKey: String
-    var apiUrl: URL = URL(string: "https://api.simplecast.com/analytics/episodes?podcast=cdeac5f4-4d81-4626-9b04-03170af3ecf8")!
-    
-//    @State var total: Int = 0
-    @State var fullObject: EpisodesData? = nil
     @State private var errorShowing: Bool = false
     @State private var errorMessage: String = ""
-    @State var next: String = ""
+    
+    @EnvironmentObject private var vm: EpisodeDataViewModel
     
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack {
-                    ForEach(fullObject?.collection ?? []) { episode in
+                    ForEach(vm.episodesData?.collection ?? []) { episode in
                         NavigationLink {
-                            VStack {
-                                Spacer()
-                                Text("Episode: \(episode.number)")
-                                Text("Special Analytics")
-                                Spacer()
-                            }
+                            SingleEpisodeAnalytics(number: episode.number, href: episode.href)
                         } label: {
                             EpisodeListIndexItem(title: episode.title,
                                                  episodeNumber: episode.number,
@@ -39,41 +28,30 @@ struct EpisodesPage: View {
                                                  downloads: episode.downloads.total)
                         }
                     }
-                    if next != "" {
+                    if vm.episodesData != nil {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
                             .onAppear {
                                 Task {
                                     do {
-                                        let responseObject = try await fetchEpisodesData(url: URL(string: next)!, apiKey: apiKey)
-                                        fullObject?.collection.append(contentsOf: responseObject.collection)
-                                        next = responseObject.pages.next.href
-                                    } catch let myError as FetchError {
-                                        errorShowing.toggle()
-                                        errorMessage = myError.description
+                                        try await vm.getMoreEpisodes()
                                     } catch {
                                         errorShowing.toggle()
-                                        errorMessage = error.localizedDescription
+                                        errorMessage = error.myErrorMessage()
                                     }
                                 }
                             }
                     }
                     
                 }
-                .navigationTitle("Episode Analytics")
-//                .foregroundColor(.accentColor)
+                .navigationTitle(Text("Episode Downloads"))
             }
             .task {
                 do {
-                    fullObject = try await fetchEpisodesData(url: apiUrl, apiKey: apiKey)
-                    next = fullObject?.pages.next.href ?? "no next url found"
-                    
-                } catch let myError as FetchError {
-                    errorShowing.toggle()
-                    errorMessage = myError.description
+                    if vm.episodesData == nil { try await vm.loadEpisodeData() }
                 } catch {
                     errorShowing.toggle()
-                    errorMessage = error.localizedDescription
+                    errorMessage = error.myErrorMessage()
                 }
             }
             .alert(isPresented: $errorShowing) {
