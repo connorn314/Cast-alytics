@@ -11,6 +11,7 @@ enum FetchError: Error {
     case failedContact
     case statusCode
     case decodeFailed
+    case invalidUrl
     
     var description: String {
         switch self {
@@ -20,6 +21,8 @@ enum FetchError: Error {
             return "Status code for response was not 200"
         case .decodeFailed:
             return "Failed to decode JSON response"
+        case .invalidUrl:
+            return "Url cannot be found or is invalid"
         }
         
     }

@@ -16,57 +16,51 @@ struct EpisodesPage: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(vm.episodesData?.collection ?? []) { episode in
-                            NavigationLink {
-                                SingleEpisodeAnalytics(number: episode.number, href: episode.href)
-                            } label: {
-                                EpisodeListIndexItem(title: episode.title,
-                                                     episodeNumber: episode.number,
-                                                     formattedDate: episode.formattedPublishDate,
-                                                     downloads: episode.downloads.total)
-                            }
+            ScrollView {
+                LazyVStack {
+                    ForEach(vm.episodesData?.collection ?? []) { episode in
+                        NavigationLink {
+                            SingleEpisodeAnalytics(number: episode.number, href: episode.href)
+                        } label: {
+                            EpisodeListIndexItem(title: episode.title,
+                                                 episodeNumber: episode.number,
+                                                 formattedDate: episode.formattedPublishDate,
+                                                 downloads: episode.downloads.total)
                         }
-                        if vm.episodesData != nil {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
-                                .onAppear {
-                                    Task {
-                                        do {
-                                            try await vm.getMoreEpisodes()
-                                        } catch {
-                                            errorShowing.toggle()
-                                            errorMessage = error.myErrorMessage()
-                                        }
+                    }
+                    if vm.episodesData != nil {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
+                            .onAppear {
+                                Task {
+                                    do {
+                                        try await vm.getMoreEpisodes()
+                                    } catch {
+                                        errorShowing.toggle()
+                                        errorMessage = error.myErrorMessage()
                                     }
                                 }
-                        }
-                        
-                    }
-                    //                .frame(maxHeight: UIScreen.main.bounds.size.height * (11/12))
-                    .navigationTitle(Text("Episode Downloads"))
-                }
-                .task {
-                    do {
-                        if vm.episodesData == nil { try await vm.loadEpisodeData() }
-                    } catch {
-                        errorShowing.toggle()
-                        errorMessage = error.myErrorMessage()
+                            }
                     }
                 }
-                .alert(isPresented: $errorShowing) {
-                    Alert(
-                        title: Text("Important message"),
-                        message: Text(errorMessage),
-                        dismissButton: .default(Text("Got it!"))
-                    )
+                .navigationTitle(Text("Episode Downloads"))
+            }
+            .task {
+                do {
+                    if vm.episodesData == nil { try await vm.loadEpisodeData() }
+                } catch {
+                    errorShowing.toggle()
+                    errorMessage = error.myErrorMessage()
                 }
             }
-            Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/12)
-        }
+            .alert(isPresented: $errorShowing) {
+                Alert(
+                    title: Text("Important message"),
+                    message: Text(errorMessage),
+                    dismissButton: .default(Text("Got it!"))
+                )
+            }
+        }.padding()
     }
 }
 

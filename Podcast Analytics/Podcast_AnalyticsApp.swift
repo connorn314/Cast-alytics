@@ -11,11 +11,13 @@ import SwiftUI
 struct Podcast_AnalyticsApp: App {
     
     @StateObject private var edvm: EpisodeDataViewModel = EpisodeDataViewModel()
+    @StateObject private var gpvm: GeneralPodcastViewModel = GeneralPodcastViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(edvm)
+                .environmentObject(gpvm)
         }
     }
 }

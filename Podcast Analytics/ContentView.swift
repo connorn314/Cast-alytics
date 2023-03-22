@@ -23,15 +23,12 @@ struct ContentView: View {
         ZStack {
             if selectedPage == .welcome {
                 WelcomePage(selectedPage: $selectedPage, apiKey: apiKey)
-                    .border(.blue)
             } else {
                switch selectedPage {
                case .episodes:
                    EpisodesPage()
-                       .border(.blue)
                case .profile:
                    ProfilePage()
-//                       .border(.blue)
                default:
                    TotalsPage()
                }
