@@ -15,31 +15,30 @@ struct EpisodeListIndexItem: View {
     @State var downloads: Int
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color.theme.secondBackground)
-                HStack (alignment: .top) {
-                    VStack (alignment: .leading) {
-                        Text("\(episodeNumber). \(title)")
-                            .font(.headline)
-                            .foregroundStyle(.primary)
-                        Spacer()
-                        Text("Date Published: \(formattedDate)")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                    }.foregroundColor(Color.theme.accent)
-                    
-                    Spacer()
-                    Text(String(downloads))
+        
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(Color.theme.secondBackground)
+//            GeometryReader { geo in
+            HStack (alignment: .top) {
+                VStack (alignment: .leading) {
+                    Text("\(episodeNumber). \(title)")
                         .font(.headline)
-                }
-                .padding()
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Text("Date Published: \(formattedDate)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }.foregroundColor(Color.theme.accent)
+                
+                Spacer()
+                Text(String(downloads))
+                    .font(.headline)
             }
-            .frame(width: geo.size.width, height: geo.size.height)
-        }
-        .frame(height: 100)
+            .padding()
+        }    
+        .frame(height: 50)
     }
 }
 

@@ -30,7 +30,6 @@ class GeneralPodcastViewModel: ObservableObject {
 //        guard var podDownloadsObject = generalPodcastData?.analyticsCollectionDict[podId] else { throw FetchError.invalidUrl }
         do {
             self.analyticsCollectionDict?[podId]?.downloadsData = try await fetchPodcastDownloads(interval: interval, podId: podId)
-            print("should have set downloads data to the analyticscollectiondict")
         } catch {
             throw error
         }
@@ -39,7 +38,6 @@ class GeneralPodcastViewModel: ObservableObject {
     func fetchPodcastDownloads(interval: String, podId: String) async throws -> DownloadsByInterval {
         var urlRequest = URLRequest(url: URL(string: "https://api.simplecast.com/analytics/downloads?podcast=\(podId)&interval=\(interval)")!)
         urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        print("made it here")
         guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
             throw FetchError.failedContact
         }

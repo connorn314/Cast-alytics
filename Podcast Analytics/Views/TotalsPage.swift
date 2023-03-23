@@ -40,7 +40,7 @@ struct TotalsPage: View {
                         Spacer()
                         ForEach(vm.generalPodcastData?.collection ?? []) { pod in
                             NavigationLink {
-                                SinglePodcastAnalytics(podId: pod.id)
+                                SinglePodcastAnalytics(podId: pod.id, podTitle: pod.title)
                             } label: {
                                 PodcastIndexItem(imageUrl: pod.imageURL, title: pod.title)
                             }

@@ -17,9 +17,7 @@ struct GeneralPodcastData: Codable {
         var collectionDict: [String: PodcastCollection] = [:]
         for podcast in collection ?? [] {
             collectionDict[podcast.id] = podcast
-            print("\(podcast.id) - \(podcast.title)")
         }
-        print("create collection")
         return collectionDict
     }
     

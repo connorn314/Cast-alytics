@@ -15,57 +15,52 @@ struct EpisodesPage: View {
     @EnvironmentObject private var vm: EpisodeDataViewModel
     
     var body: some View {
-        NavigationView {
-            if vm.episodesData == nil {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
-                    .task {
-                        do {
-                            if vm.episodesData == nil { try await vm.loadEpisodeData() }
-                        } catch {
-                            errorShowing.toggle()
-                            errorMessage = error.myErrorMessage()
-                        }
+        if vm.episodesData == nil {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
+                .task {
+                    do {
+                        if vm.episodesData == nil { try await vm.loadEpisodeData() }
+                    } catch {
+                        errorShowing.toggle()
+                        errorMessage = error.myErrorMessage()
                     }
-                    .alert(isPresented: $errorShowing) {
-                        Alert(
-                            title: Text("Important message"),
-                            message: Text(errorMessage),
-                            dismissButton: .default(Text("Got it!"))
-                        )
+                }
+                .alert(isPresented: $errorShowing) {
+                    Alert(
+                        title: Text("Important message"),
+                        message: Text(errorMessage),
+                        dismissButton: .default(Text("Got it!"))
+                    )
+                }
+        } else {
+            LazyVStack(spacing: 40){
+                ForEach(vm.episodesData?.collection ?? []) { episode in
+                    NavigationLink {
+                        SingleEpisodeAnalytics(number: episode.number, href: episode.href)
+                    } label: {
+                        EpisodeListIndexItem(title: episode.title,
+                                             episodeNumber: episode.number,
+                                             formattedDate: episode.formattedPublishDate,
+                                             downloads: episode.downloads.total)
                     }
-            } else {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(vm.episodesData?.collection ?? []) { episode in
-                            NavigationLink {
-                                SingleEpisodeAnalytics(number: episode.number, href: episode.href)
-                            } label: {
-                                EpisodeListIndexItem(title: episode.title,
-                                                     episodeNumber: episode.number,
-                                                     formattedDate: episode.formattedPublishDate,
-                                                     downloads: episode.downloads.total)
+                }
+                if vm.episodesData != nil {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
+                        .onAppear {
+                            Task {
+                                do {
+                                    try await vm.getMoreEpisodes()
+                                } catch {
+                                    errorShowing.toggle()
+                                    errorMessage = error.myErrorMessage()
+                                }
                             }
                         }
-                        if vm.episodesData != nil {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
-                                .onAppear {
-                                    Task {
-                                        do {
-                                            try await vm.getMoreEpisodes()
-                                        } catch {
-                                            errorShowing.toggle()
-                                            errorMessage = error.myErrorMessage()
-                                        }
-                                    }
-                                }
-                        }
-                    }
-                    .padding()
-                    .navigationTitle(Text("Episode Downloads"))
                 }
-            }
+            
+            }.padding()
         }
     }
 }

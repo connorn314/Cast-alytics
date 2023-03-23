@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SinglePodcastAnalytics: View {
     
-    @State var podId: String
+    var podId: String
+    var podTitle: String
     var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
     
     @EnvironmentObject private var vm: GeneralPodcastViewModel
@@ -18,7 +19,7 @@ struct SinglePodcastAnalytics: View {
     @State var errorShowing: Bool = false
     @State var errorMessage: String = ""
     @State var listensData: Listen? = nil
-    @State var count = 0
+    @State var currentTab = "Max"
     
     var body: some View {
         if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
@@ -28,7 +29,6 @@ struct SinglePodcastAnalytics: View {
                     do {
                         if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
                             try await vm.loadPodcastDownloads(podId: podId, interval: interval)
-                            print("after load podcast downloads call")
                             try await fetchPodcastListeners()
                         }
                     } catch {
@@ -44,10 +44,36 @@ struct SinglePodcastAnalytics: View {
                     )
                 }
         } else {
-            VStack {
-//                Text("Total listeners: \(listensData?.total ?? 0)")
-                LineGraphDisplay(inputArrayDownloads: vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval)
-                Spacer()
+            ScrollView {
+                LazyVStack (spacing: 20){
+                    VStack (spacing: 20) {
+                        HStack {
+                            Text("Downloads")
+                            Spacer()
+                            Picker("", selection: $currentTab){
+                                Text("YTD")
+                                    .tag("YTD")
+                                Text("1 yr")
+                                    .tag("1 yr")
+                                Text("Max")
+                                    .tag("Max")
+                            }.pickerStyle(.segmented)
+                                .frame(maxWidth: 180)
+                        }
+                        LineGraphDisplay(inputArrayDownloads: vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval)
+                        Text("Time in Months")
+                    }.navigationTitle(podTitle)
+                        .padding()
+                    HStack{
+                        Text("Episodes")
+                            .padding()
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    EpisodesPage()
+                }
             }
         }
     }

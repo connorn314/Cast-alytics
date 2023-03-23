@@ -15,7 +15,7 @@ struct LineGraphDisplay: View {
         Chart(inputArrayDownloads ?? []) { month in
             LineMark(x: .value("Month", month.interval),
                      y: .value("Downloads", month.downloadsTotal))
-        }.frame(maxHeight: 500)
+        }.frame(height: 250)
     }
 }
 
