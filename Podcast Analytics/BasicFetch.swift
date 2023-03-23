@@ -28,7 +28,7 @@ enum FetchError: Error {
     }
 }
 
-func fetchEpisodesData(url: URL, apiKey: String) async throws -> EpisodesData {
+func fetchEpisodesData(url: URL, apiKey: String) async throws -> DownloadsData {
     var urlRequest = URLRequest(url: url)
     urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
     
@@ -43,11 +43,9 @@ func fetchEpisodesData(url: URL, apiKey: String) async throws -> EpisodesData {
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"
     decoder.dateDecodingStrategy = .formatted(formatter)
     
-    guard let decodedResponse = try? decoder.decode(EpisodesData.self, from: data) else {
+    guard let decodedResponse = try? decoder.decode(DownloadsData.self, from: data) else {
         throw FetchError.decodeFailed
     }
-    
-//        total = decodedResponse.count
-//        fullObject = decodedResponse
+
     return decodedResponse
 }

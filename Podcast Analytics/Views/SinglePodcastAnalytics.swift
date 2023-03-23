@@ -11,6 +11,9 @@ struct SinglePodcastAnalytics: View {
     
     @State var podId: String
     var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
+    
+    @EnvironmentObject private var vm: GeneralPodcastViewModel
+    
     @State var interval: String = "month"
     @State var errorShowing: Bool = false
     @State var errorMessage: String = ""
@@ -24,6 +27,8 @@ struct SinglePodcastAnalytics: View {
                 .task {
                     do {
                         if listensData == nil {
+                            try await vm.loadPodcastDownloads(podId: podId, interval: interval)
+                            print("after load podcast downloads call")
                             try await fetchPodcastListeners()
                         }
                     } catch {
@@ -42,6 +47,9 @@ struct SinglePodcastAnalytics: View {
             VStack {
                 Spacer()
                 Text("Total listeners: \(listensData?.total ?? 0)")
+                ForEach (vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval ?? []){ month in
+                    Text("Yoou had \(month.downloadsTotal) in \(month.interval)")
+                }
                 Spacer()
             }
         }

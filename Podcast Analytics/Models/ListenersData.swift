@@ -9,16 +9,29 @@ import Foundation
 
 //no access to the api endpoint on the basic
 
-//struct PodcastListens: Codable {
-//    let total: Int?
-//    let interval: String?
-//    let byInterval: [Listen]?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case total, interval
-//        case byInterval = "by_interval"
-//    }
-//}
+struct DownloadsByInterval: Codable {
+    let total: Int?
+    let interval: String?
+    let byInterval: [DownloadInterval]?
+
+    enum CodingKeys: String, CodingKey {
+        case total, interval
+        case byInterval = "by_interval"
+    }
+}
+
+struct DownloadInterval: Codable, Identifiable {
+    let interval: String
+    let downloadsTotal: Int
+    let downloadsPercent: Double
+    let id = UUID()
+
+    enum CodingKeys: String, CodingKey {
+        case interval
+        case downloadsTotal = "downloads_total"
+        case downloadsPercent = "downloads_percent"
+    }
+}
 
 struct Listen: Codable, Identifiable  {
     let total: Int

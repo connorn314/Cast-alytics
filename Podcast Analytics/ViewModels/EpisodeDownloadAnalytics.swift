@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class EpisodeDataViewModel: ObservableObject {
-    @Published var episodesData: EpisodesData? = nil
+    @Published var episodesData: DownloadsData? = nil
     
     private var apiUrl: URL = URL(string: "https://api.simplecast.com/analytics/episodes?podcast=cdeac5f4-4d81-4626-9b04-03170af3ecf8")!
     

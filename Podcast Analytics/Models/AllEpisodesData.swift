@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EpisodesData: Codable {
+struct DownloadsData: Codable {
     let href: String
     let total: Int
     var pages: JPages

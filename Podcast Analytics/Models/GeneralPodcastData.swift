@@ -12,12 +12,26 @@ struct GeneralPodcastData: Codable {
     var pages: PodcastPages?
     let count: Int?
     var collection: [PodcastCollection]?
-
+    
+    func createCollectionDict() -> [String: PodcastCollection] {
+        var collectionDict: [String: PodcastCollection] = [:]
+        for podcast in collection ?? [] {
+            collectionDict[podcast.id] = podcast
+            print("\(podcast.id) - \(podcast.title)")
+        }
+        print("create collection")
+        return collectionDict
+    }
+    
     enum CodingKeys: String, CodingKey {
         case href, pages
         case count, collection
     }
 }
+
+//struct AnalyticsForPodcast: Codable, Identifiable {
+//    
+//}
 
 struct PodcastCollection: Codable, Identifiable {
     let href: String?
@@ -26,6 +40,7 @@ struct PodcastCollection: Codable, Identifiable {
     let isPendingInvitation: Bool?
     let imageURL: String?
     let id: String
+    var downloadsData: DownloadsByInterval? // I added this, going to nest downloads data within the pod collection
     let episodes: Episodes?
     let displayOwnerEmail: Bool?
     let currentUserPermission: PodcastPermission?
