@@ -21,12 +21,12 @@ struct SinglePodcastAnalytics: View {
     @State var count = 0
     
     var body: some View {
-        if listensData == nil {
+        if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
                 .task {
                     do {
-                        if listensData == nil {
+                        if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
                             try await vm.loadPodcastDownloads(podId: podId, interval: interval)
                             print("after load podcast downloads call")
                             try await fetchPodcastListeners()
@@ -45,11 +45,8 @@ struct SinglePodcastAnalytics: View {
                 }
         } else {
             VStack {
-                Spacer()
-                Text("Total listeners: \(listensData?.total ?? 0)")
-                ForEach (vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval ?? []){ month in
-                    Text("Yoou had \(month.downloadsTotal) in \(month.interval)")
-                }
+//                Text("Total listeners: \(listensData?.total ?? 0)")
+                LineGraphDisplay(inputArrayDownloads: vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval)
                 Spacer()
             }
         }
