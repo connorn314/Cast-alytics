@@ -25,7 +25,7 @@ struct PodcastCollection: Codable, Identifiable {
     let permission: PodcastPermission?
     let isPendingInvitation: Bool?
     let imageURL: String?
-    let id: String?
+    let id: String
     let episodes: Episodes?
     let displayOwnerEmail: Bool?
     let currentUserPermission: PodcastPermission?

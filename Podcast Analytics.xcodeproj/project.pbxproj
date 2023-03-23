@@ -24,6 +24,9 @@
 		4DD0C5CE29B1194800063FDE /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0C5CD29B1194800063FDE /* WelcomePage.swift */; };
 		4DD0C5D029B11C9C00063FDE /* TotalsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0C5CF29B11C9C00063FDE /* TotalsPage.swift */; };
 		4DD0C5D229B11DA400063FDE /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0C5D129B11DA400063FDE /* NavBar.swift */; };
+		4DF2063B29CBC12000959D4B /* SinglePodcastAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2063A29CBC12000959D4B /* SinglePodcastAnalytics.swift */; };
+		4DF2063D29CBD2F000959D4B /* PodcastAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2063C29CBD2F000959D4B /* PodcastAnalytics.swift */; };
+		4DF2063F29CBD34400959D4B /* ListenersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2063E29CBD34400959D4B /* ListenersData.swift */; };
 		4DF80D4E29CA372F00A2343F /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF80D4D29CA372F00A2343F /* ErrorHandling.swift */; };
 		4DF80D5029CA403400A2343F /* SingleEpisodeAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF80D4F29CA403400A2343F /* SingleEpisodeAnalytics.swift */; };
 		4DF87E4829CA15E500C3E336 /* EpisodeDownloadAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF87E4729CA15E500C3E336 /* EpisodeDownloadAnalytics.swift */; };
@@ -50,6 +53,9 @@
 		4DD0C5CD29B1194800063FDE /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		4DD0C5CF29B11C9C00063FDE /* TotalsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsPage.swift; sourceTree = "<group>"; };
 		4DD0C5D129B11DA400063FDE /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		4DF2063A29CBC12000959D4B /* SinglePodcastAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePodcastAnalytics.swift; sourceTree = "<group>"; };
+		4DF2063C29CBD2F000959D4B /* PodcastAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastAnalytics.swift; sourceTree = "<group>"; };
+		4DF2063E29CBD34400959D4B /* ListenersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenersData.swift; sourceTree = "<group>"; };
 		4DF80D4D29CA372F00A2343F /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		4DF80D4F29CA403400A2343F /* SingleEpisodeAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEpisodeAnalytics.swift; sourceTree = "<group>"; };
 		4DF87E4729CA15E500C3E336 /* EpisodeDownloadAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDownloadAnalytics.swift; sourceTree = "<group>"; };
@@ -80,6 +86,7 @@
 			children = (
 				4D54C5BD29BA98600046AC29 /* AllEpisodesData.swift */,
 				4D7C319B29CB6EDB0048362C /* GeneralPodcastData.swift */,
+				4DF2063E29CBD34400959D4B /* ListenersData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +138,7 @@
 			children = (
 				4DD0C5CD29B1194800063FDE /* WelcomePage.swift */,
 				4DD0C5CF29B11C9C00063FDE /* TotalsPage.swift */,
+				4DF2063A29CBC12000959D4B /* SinglePodcastAnalytics.swift */,
 				4D7C319F29CB80170048362C /* PodcastIndexItem.swift */,
 				4DD0C5D129B11DA400063FDE /* NavBar.swift */,
 				4D622B8629B9415100D30223 /* NavBarButton.swift */,
@@ -147,6 +155,7 @@
 			children = (
 				4DF87E4729CA15E500C3E336 /* EpisodeDownloadAnalytics.swift */,
 				4D7C319D29CB70780048362C /* GeneralPodcastAndPermissions.swift */,
+				4DF2063C29CBD2F000959D4B /* PodcastAnalytics.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -222,7 +231,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DD0C5D229B11DA400063FDE /* NavBar.swift in Sources */,
+				4DF2063B29CBC12000959D4B /* SinglePodcastAnalytics.swift in Sources */,
 				4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */,
+				4DF2063D29CBD2F000959D4B /* PodcastAnalytics.swift in Sources */,
 				4D622B8D29B943B100D30223 /* ProfilePage.swift in Sources */,
 				4DD0C5CE29B1194800063FDE /* WelcomePage.swift in Sources */,
 				4D7C31A029CB80170048362C /* PodcastIndexItem.swift in Sources */,
@@ -233,6 +244,7 @@
 				4D7C319E29CB70780048362C /* GeneralPodcastAndPermissions.swift in Sources */,
 				4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */,
 				4D7C319C29CB6EDB0048362C /* GeneralPodcastData.swift in Sources */,
+				4DF2063F29CBD34400959D4B /* ListenersData.swift in Sources */,
 				4DF80D4E29CA372F00A2343F /* ErrorHandling.swift in Sources */,
 				4D622B8B29B9436000D30223 /* EpisodesPage.swift in Sources */,
 				4DF80D5029CA403400A2343F /* SingleEpisodeAnalytics.swift in Sources */,
