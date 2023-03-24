@@ -34,6 +34,7 @@ struct ContentView: View {
                }
                NavBar(selectedPage: $selectedPage)
                    .frame(maxHeight: .infinity, alignment: .bottom)
+                
             }
         }
     }

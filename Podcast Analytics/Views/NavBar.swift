@@ -11,26 +11,30 @@ struct NavBar: View {
     @Binding var selectedPage: Pages
     
     var body: some View {
-        HStack (alignment: .top, spacing: 0) {
-            Button {
-                selectedPage = .overall
-            } label: {
-                NavBarButton(buttonText: "Home", isActive: (selectedPage == .overall), buttonImage: "house")
-            }
-            Button {
-                selectedPage = .episodes
-            } label: {
-                NavBarButton(buttonText: "Analytics", isActive: (selectedPage == .episodes), buttonImage: "chart.bar")
-                    .overlay(Divider(), alignment: .leading)
-                    .overlay(Divider(), alignment: .trailing)
-            }
-            Button {
-                selectedPage = .profile
-            } label: {
-                NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile), buttonImage: "person")
-            }
-        }.frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/16)
-        
+        ZStack(alignment: .top) {
+            Rectangle()
+                .foregroundColor(Color.theme.background)
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: 40)
+                .shadow(color: .primary.opacity(0.5), radius: 4)
+            HStack (alignment: .top, spacing: 0) {
+                Button {
+                    selectedPage = .overall
+                } label: {
+                    NavBarButton(buttonText: "Home", isActive: (selectedPage == .overall), buttonImage: "house")
+                }
+                Button {
+                    selectedPage = .episodes
+                } label: {
+                    NavBarButton(buttonText: "Analytics", isActive: (selectedPage == .episodes), buttonImage: "chart.bar")
+                }
+                Button {
+                    selectedPage = .profile
+                } label: {
+                    NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile), buttonImage: "person")
+                }
+            }.frame(maxWidth: .infinity, maxHeight: 40)
+        }.frame(maxWidth: .infinity, maxHeight: 40)
     }
 }
 

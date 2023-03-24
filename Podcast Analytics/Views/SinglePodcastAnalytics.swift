@@ -63,13 +63,26 @@ struct SinglePodcastAnalytics: View {
                             }.pickerStyle(.segmented)
                                 .frame(maxWidth: 180)
                         }
+                        let totalDownloads = graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...].reduce(0) { partialResult, DownloadInterval in
+                            return partialResult + DownloadInterval.downloadsTotal
+                        }
+                        let weeklyAvg: Double = round((Double(totalDownloads) / Double(currentTab)) * 10) / 10.0
+                        HStack {
+                            Text("Weely Avg: \(String(weeklyAvg))")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("Total Downloads: \(totalDownloads)")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
                         LineGraphDisplay(inputArrayDownloads: graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...], xUnit: .weekOfYear, animateChart: $animateChart)
                     }.navigationTitle(podTitle)
                         .padding()
                         .background{
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(Color.theme.background
-                                    .shadow(.drop(radius: 2)))
+                                .fill(Color.theme.background)
+                                .shadow(color: .primary.opacity(0.5), radius: 4)
                         }.padding()
                         
                     HStack{

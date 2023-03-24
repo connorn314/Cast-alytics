@@ -16,15 +16,14 @@ struct NavBarButton: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                Rectangle()
-                    .frame(width: geo.size.width, height: geo.size.height)
-                    .foregroundColor(isActive ? Color.theme.accent : Color.theme.background)
+                isActive ? Color.theme.accent : Color.theme.background
                 VStack {
                     Image(systemName: buttonImage)
                     Text(buttonText)
-                        .font(.subheadline)
+                        .font(.caption)
                         .fontWeight(.semibold)
-                }
+                    Spacer()
+                }.padding()
                 .foregroundColor(isActive ? Color.theme.background : Color.theme.accent)
             }
         }.ignoresSafeArea()
