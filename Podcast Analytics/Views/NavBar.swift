@@ -11,7 +11,7 @@ struct NavBar: View {
     @Binding var selectedPage: Pages
     
     var body: some View {
-        HStack (alignment: .bottom, spacing: 0) {
+        HStack (alignment: .top, spacing: 0) {
             Button {
                 selectedPage = .overall
             } label: {
@@ -29,7 +29,7 @@ struct NavBar: View {
             } label: {
                 NavBarButton(buttonText: "Profile", isActive: (selectedPage == .profile), buttonImage: "person")
             }
-        }.frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/12)
+        }.frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.size.height/16)
         
     }
 }

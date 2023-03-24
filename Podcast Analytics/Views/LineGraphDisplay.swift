@@ -9,13 +9,25 @@ import SwiftUI
 import Charts
 
 struct LineGraphDisplay: View {
-    var inputArrayDownloads: [DownloadInterval]? = nil
+    var inputArrayDownloads: ArraySlice<DownloadInterval>
+    @State var xUnit: Calendar.Component
+    @Binding var animateChart: Bool
     
     var body: some View {
-        Chart(inputArrayDownloads ?? []) { month in
-            LineMark(x: .value("Month", month.interval),
-                     y: .value("Downloads", month.downloadsTotal))
+        Chart(inputArrayDownloads) { week in
+            LineMark(x: .value("Week", week.interval, unit: xUnit),
+                     y: .value("Downloads", (animateChart ? week.downloadsTotal : 0)))
+            .foregroundStyle(.primary)
+            AreaMark(x: .value("Week", week.interval, unit: xUnit),
+                     y: .value("Downloads", (animateChart ? week.downloadsTotal : 0)))
+            .foregroundStyle(.secondary)
+        }.onAppear{
+            withAnimation {
+                animateChart.toggle()
+            }
         }.frame(height: 250)
+            .chartXAxisLabel("Weeks")
+            .chartYAxisLabel("Downloads")
     }
 }
 

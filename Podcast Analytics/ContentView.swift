@@ -26,7 +26,7 @@ struct ContentView: View {
             } else {
                switch selectedPage {
                case .episodes:
-                   EpisodesPage()
+                   ProfilePage()
                case .profile:
                    ProfilePage()
                default:

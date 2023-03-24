@@ -15,11 +15,15 @@ struct SinglePodcastAnalytics: View {
     
     @EnvironmentObject private var vm: GeneralPodcastViewModel
     
-    @State var interval: String = "month"
+    @State var interval: String = "week"
     @State var errorShowing: Bool = false
     @State var errorMessage: String = ""
     @State var listensData: Listen? = nil
-    @State var currentTab = "Max"
+    @State var currentTab = 12
+    @State var graphData: [DownloadInterval] = []
+    @State var animateChart: Bool = false
+    
+    
     
     var body: some View {
         if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
@@ -27,10 +31,8 @@ struct SinglePodcastAnalytics: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
                 .task {
                     do {
-                        if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
-                            try await vm.loadPodcastDownloads(podId: podId, interval: interval)
-                            try await fetchPodcastListeners()
-                        }
+                        try await vm.loadPodcastDownloads(podId: podId, interval: interval)
+//                            try await fetchPodcastListeners()
                     } catch {
                         errorShowing.toggle()
                         errorMessage = error.myErrorMessage()
@@ -48,22 +50,28 @@ struct SinglePodcastAnalytics: View {
                 LazyVStack (spacing: 20){
                     VStack (spacing: 20) {
                         HStack {
-                            Text("Downloads")
+                            Text("Weekly Downloads")
+                                .fontWeight(.semibold)
                             Spacer()
                             Picker("", selection: $currentTab){
                                 Text("YTD")
-                                    .tag("YTD")
+                                    .tag(12) // make this dynamic!!!!
                                 Text("1 yr")
-                                    .tag("1 yr")
+                                    .tag(55)
                                 Text("Max")
-                                    .tag("Max")
+                                    .tag(graphData.count)
                             }.pickerStyle(.segmented)
                                 .frame(maxWidth: 180)
                         }
-                        LineGraphDisplay(inputArrayDownloads: vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval)
-                        Text("Time in Months")
+                        LineGraphDisplay(inputArrayDownloads: graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...], xUnit: .weekOfYear, animateChart: $animateChart)
                     }.navigationTitle(podTitle)
                         .padding()
+                        .background{
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(Color.theme.background
+                                    .shadow(.drop(radius: 2)))
+                        }.padding()
+                        
                     HStack{
                         Text("Episodes")
                             .padding()
@@ -74,6 +82,8 @@ struct SinglePodcastAnalytics: View {
                     }
                     EpisodesPage()
                 }
+            }.onAppear{
+                graphData = vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval ?? []
             }
         }
     }

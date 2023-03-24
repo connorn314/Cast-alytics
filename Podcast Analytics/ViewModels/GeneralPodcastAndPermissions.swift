@@ -27,7 +27,6 @@ class GeneralPodcastViewModel: ObservableObject {
     }
     
     func loadPodcastDownloads(podId: String, interval: String) async throws {
-//        guard var podDownloadsObject = generalPodcastData?.analyticsCollectionDict[podId] else { throw FetchError.invalidUrl }
         do {
             self.analyticsCollectionDict?[podId]?.downloadsData = try await fetchPodcastDownloads(interval: interval, podId: podId)
         } catch {
@@ -45,6 +44,10 @@ class GeneralPodcastViewModel: ObservableObject {
             throw FetchError.statusCode
         }
         let decoder = JSONDecoder()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        
         guard let decodedResponse = try? decoder.decode(DownloadsByInterval.self, from: data) else {
             throw FetchError.decodeFailed
         }

@@ -21,7 +21,7 @@ struct DownloadsByInterval: Codable {
 }
 
 struct DownloadInterval: Codable, Identifiable {
-    let interval: String
+    let interval: Date
     let downloadsTotal: Int
     let downloadsPercent: Double
     let id = UUID()
