@@ -18,7 +18,6 @@ struct SinglePodcastAnalytics: View {
     @State var interval: String = "week"
     @State var errorShowing: Bool = false
     @State var errorMessage: String = ""
-    @State var listensData: Listen? = nil
     @State var currentTab = 12
     @State var graphData: [DownloadInterval] = []
     @State var animateChart: Bool = false
@@ -32,7 +31,6 @@ struct SinglePodcastAnalytics: View {
                 .task {
                     do {
                         try await vm.loadPodcastDownloads(podId: podId, interval: interval)
-//                            try await fetchPodcastListeners()
                     } catch {
                         errorShowing.toggle()
                         errorMessage = error.myErrorMessage()
@@ -48,43 +46,12 @@ struct SinglePodcastAnalytics: View {
         } else {
             ScrollView {
                 LazyVStack (spacing: 20){
-                    VStack (spacing: 20) {
-                        HStack {
-                            Text("Weekly Downloads")
-                                .fontWeight(.semibold)
-                            Spacer()
-                            Picker("", selection: $currentTab){
-                                Text("YTD")
-                                    .tag(12) // make this dynamic!!!!
-                                Text("1 yr")
-                                    .tag(55)
-                                Text("Max")
-                                    .tag(graphData.count)
-                            }.pickerStyle(.segmented)
-                                .frame(maxWidth: 180)
-                        }
-                        let totalDownloads = graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...].reduce(0) { partialResult, DownloadInterval in
-                            return partialResult + DownloadInterval.downloadsTotal
-                        }
-                        let weeklyAvg: Double = round((Double(totalDownloads) / Double(currentTab)) * 10) / 10.0
-                        HStack {
-                            Text("Weely Avg: \(String(weeklyAvg))")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                            Spacer()
-                            Text("Total Downloads: \(totalDownloads)")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                        }
-                        LineGraphDisplay(inputArrayDownloads: graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...], xUnit: .weekOfYear, animateChart: $animateChart)
-                    }.navigationTitle(podTitle)
-                        .padding()
-                        .background{
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(Color.theme.background)
-                                .shadow(color: .primary.opacity(0.5), radius: 4)
-                        }.padding()
-                        
+                    ChartAnalytics(isPodcastOrEpisode: true, currentTab: $currentTab, graphData: $graphData, animateChart: $animateChart, podTitle: podTitle, tags: [
+                        0: ("YTD", 12),
+                        1: ("1 Yr", 55),
+                        2: ("Max", graphData.count)
+                    ], calendarInterval: .weekOfYear, intervalDescription: "Weekly")
+                        .task{ graphData = vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval ?? [] }
                     HStack{
                         Text("Episodes")
                             .padding()
@@ -95,28 +62,26 @@ struct SinglePodcastAnalytics: View {
                     }
                     EpisodesPage()
                 }
-            }.onAppear{
-                graphData = vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval ?? []
             }
         }
     }
     
-    func fetchPodcastListeners() async throws {
-        var urlRequest = URLRequest(url: URL(string: "https://api.simplecast.com/analytics/podcasts/listeners?podcast=\(podId)")!)
-        urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
-        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
-            throw FetchError.failedContact
-        }
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw FetchError.statusCode
-        }
-        let decoder = JSONDecoder()
-        guard let decodedResponse = try? decoder.decode(Listen.self, from: data) else {
-            throw FetchError.decodeFailed
-        }
-        listensData = decodedResponse
-    }
+//    func fetchPodcastListeners() async throws {
+//        var urlRequest = URLRequest(url: URL(string: "https://api.simplecast.com/analytics/podcasts/listeners?podcast=\(podId)")!)
+//        urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        
+//        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
+//            throw FetchError.failedContact
+//        }
+//        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+//            throw FetchError.statusCode
+//        }
+//        let decoder = JSONDecoder()
+//        guard let decodedResponse = try? decoder.decode(Listen.self, from: data) else {
+//            throw FetchError.decodeFailed
+//        }
+//        listensData = decodedResponse
+//    }
 }
 
 //struct SinglePodcastAnalytics_Previews: PreviewProvider {

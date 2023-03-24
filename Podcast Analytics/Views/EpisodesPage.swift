@@ -37,7 +37,7 @@ struct EpisodesPage: View {
             LazyVStack(spacing: 40){
                 ForEach(vm.episodesData?.collection ?? []) { episode in
                     NavigationLink {
-                        SingleEpisodeAnalytics(number: episode.number, href: episode.href)
+                        SingleEpisodeAnalytics(episodeId: episode.id, episodeTitle: episode.title, number: episode.number)
                     } label: {
                         EpisodeListIndexItem(title: episode.title,
                                              episodeNumber: episode.number,

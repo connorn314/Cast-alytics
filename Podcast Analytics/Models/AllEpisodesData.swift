@@ -13,17 +13,31 @@ struct DownloadsData: Codable {
     var pages: JPages
     let count: Int
     var collection: [Collection]
+    
+    func createAnalyticsDict() -> [String: EpisodeAnalytics] {
+        var collectionDict: [String: EpisodeAnalytics] = [:]
+        for episode in collection {
+            collectionDict[episode.id] = EpisodeAnalytics(id: episode.id)
+        }
+        return collectionDict
+    }
 }
 
+struct EpisodeAnalytics: Codable, Identifiable {
+    let id: String
+    var downloadsByInterval: DownloadsByInterval?
+    // will add more as different analytics become available
+}
 
 struct Collection: Codable, Identifiable {
     let href: String
     let type, title: String
-    let season: Season
+//    let season: Season
     let publishedAt: Date
     let number: Int
     let id: String
     let downloads: Downloads
+    
     
     var formattedPublishDate: String {
         publishedAt.formatted(date: .abbreviated, time: .shortened)
@@ -31,7 +45,7 @@ struct Collection: Codable, Identifiable {
 
 
     enum CodingKeys: String, CodingKey {
-        case href, type, title, season
+        case href, type, title
         case publishedAt = "published_at"
         case number, id, downloads
     }
@@ -43,10 +57,10 @@ struct Downloads: Codable {
 }
 
 
-struct Season: Codable {
-    let href: String
-    let number: Int
-}
+//struct Season: Codable {
+//    let href: String
+//    let number: Int
+//}
 
 struct JPages: Codable {
     let total: Int

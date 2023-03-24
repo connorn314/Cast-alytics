@@ -12,7 +12,7 @@ import Foundation
 struct DownloadsByInterval: Codable {
     let total: Int?
     let interval: String?
-    let byInterval: [DownloadInterval]?
+    let byInterval: [DownloadInterval]
 
     enum CodingKeys: String, CodingKey {
         case total, interval
