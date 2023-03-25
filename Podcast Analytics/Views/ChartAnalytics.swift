@@ -53,11 +53,13 @@ struct ChartAnalytics: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
             }
-            if isPodcastOrEpisode == true {
-                LineGraphDisplay(inputArrayDownloads: graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...], xUnit: calendarInterval)
-            } else {
-                AggregateLineGraphDisplay(inputArrayDownloads: ((graphData.count > currentTab) ? graphData[...currentTab] : []), xUnit: calendarInterval)
-            }
+
+            LineGraphDisplay(inputArrayDownloads: isPodcastOrEpisode ?
+                             (graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...]) :
+                                ((graphData.count > currentTab) ? graphData[...currentTab] : []),
+                             xUnit: calendarInterval, regularLineGraph: isPodcastOrEpisode)
+            
+//            AggregateLineGraphDisplay(inputArrayDownloads: ((graphData.count > currentTab) ? graphData[...currentTab] : []), xUnit: calendarInterval)
         }.navigationTitle(podTitle)
             .padding()
             .background{

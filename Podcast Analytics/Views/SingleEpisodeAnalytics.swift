@@ -18,7 +18,7 @@ struct SingleEpisodeAnalytics: View {
     @State var interval: String = "day"
     @State var errorShowing: Bool = false
     @State var errorMessage: String = ""
-    @State var currentTab = 12
+    @State var currentTab = 7
     @State var graphData: [DownloadInterval] = []
     @State var animateChart: Bool = false
     
@@ -53,7 +53,7 @@ struct SingleEpisodeAnalytics: View {
                     ], calendarInterval: .day, intervalDescription: "Daily")
                     .task{ graphData = vm.episodesAnalyticsDict?[episodeId]?.downloadsByInterval?.byInterval ?? [] }
                     HStack{
-                        Text("Episodes")
+                        Text("Other Analytics")
                             .padding()
                             .font(.largeTitle)
                             .fontWeight(.bold)
