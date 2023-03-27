@@ -22,7 +22,7 @@ struct SinglePodcastAnalytics: View {
     @State var graphData: [DownloadInterval] = []
     @State var animateChart: Bool = false
     
-    
+    @State var presentShowDescription = false
     
     var body: some View {
         if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
@@ -31,7 +31,11 @@ struct SinglePodcastAnalytics: View {
                 .task {
                     do {
                         try await vm.loadPodcastDownloads(podId: podId, interval: interval)
+//                        print("here: \(vm.analyticsCollectionDict?[podId]?.description ?? "didn't set")")
                     } catch {
+                        print("now error throwing should toggle")
+                        print("error: \(error.myErrorMessage())")
+                        print("or: \(error.localizedDescription)")
                         errorShowing.toggle()
                         errorMessage = error.myErrorMessage()
                     }
@@ -52,36 +56,43 @@ struct SinglePodcastAnalytics: View {
                         2: ("Max", graphData.count)
                     ], calendarInterval: .weekOfYear, intervalDescription: "Weekly")
                         .task{ graphData = vm.analyticsCollectionDict?[podId]?.downloadsData?.byInterval ?? [] }
-                    HStack{
+                    HStack (alignment: .center){
                         Text("Episodes")
                             .padding()
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
                         Spacer()
+                        Button {
+                            presentShowDescription.toggle()
+                        } label: {
+                            ZStack (alignment: .center){
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundColor(Color.theme.accent)
+    //                                .shadow(color: .primary, radius: 2)
+                                    .padding()
+                                Text("Show Description")
+                                    .foregroundColor(Color.theme.background)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                            }
+                        }
+                        .sheet(isPresented: $presentShowDescription) {
+                            ShowDescription(podId: podId)
+                        }
+                    }.task {
+                        do {
+                            try await vm.loadPodcastDescription(podId: podId)
+                        } catch {
+                            errorShowing.toggle()
+                            errorMessage = error.myErrorMessage()
+                        }
                     }
                     EpisodesPage()
                 }
             }
         }
     }
-    
-//    func fetchPodcastListeners() async throws {
-//        var urlRequest = URLRequest(url: URL(string: "https://api.simplecast.com/analytics/podcasts/listeners?podcast=\(podId)")!)
-//        urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-//        
-//        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
-//            throw FetchError.failedContact
-//        }
-//        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-//            throw FetchError.statusCode
-//        }
-//        let decoder = JSONDecoder()
-//        guard let decodedResponse = try? decoder.decode(Listen.self, from: data) else {
-//            throw FetchError.decodeFailed
-//        }
-//        listensData = decodedResponse
-//    }
 }
 
 //struct SinglePodcastAnalytics_Previews: PreviewProvider {

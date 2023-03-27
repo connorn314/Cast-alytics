@@ -34,6 +34,23 @@ class GeneralPodcastViewModel: ObservableObject {
         }
     }
     
+    func loadPodcastDescription(podId: String) async throws {
+        var urlRequest = URLRequest(url: URL(string: "https://api.simplecast.com/podcasts/\(podId)")!)
+        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
+            throw FetchError.failedContact
+        }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            throw FetchError.statusCode
+        }
+        let decoder = JSONDecoder()
+        guard let decodedResponse = try? decoder.decode(Description.self, from: data) else {
+            throw FetchError.decodeFailed
+        }
+        self.analyticsCollectionDict?[podId]?.descriptionString = decodedResponse.description
+    }
+    
     func fetchPodcastDownloads(interval: String, podId: String) async throws -> DownloadsByInterval {
         var urlRequest = URLRequest(url: URL(string: "https://api.simplecast.com/analytics/downloads?podcast=\(podId)&interval=\(interval)")!)
         urlRequest.setValue( "Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
@@ -51,7 +68,7 @@ class GeneralPodcastViewModel: ObservableObject {
         guard let decodedResponse = try? decoder.decode(DownloadsByInterval.self, from: data) else {
             throw FetchError.decodeFailed
         }
-        
+        print("loadPodcastDownloads working")
         return decodedResponse
     }
     

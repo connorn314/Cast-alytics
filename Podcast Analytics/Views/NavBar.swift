@@ -23,11 +23,11 @@ struct NavBar: View {
                 } label: {
                     NavBarButton(buttonText: "Home", isActive: (selectedPage == .overall), buttonImage: "house")
                 }
-                Button {
-                    selectedPage = .episodes
-                } label: {
-                    NavBarButton(buttonText: "Analytics", isActive: (selectedPage == .episodes), buttonImage: "chart.bar")
-                }
+//                Button {
+//                    selectedPage = .episodes
+//                } label: {
+//                    NavBarButton(buttonText: "Analytics", isActive: (selectedPage == .episodes), buttonImage: "chart.bar")
+//                }
                 Button {
                     selectedPage = .profile
                 } label: {

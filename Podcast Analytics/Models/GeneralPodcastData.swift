@@ -31,6 +31,16 @@ struct GeneralPodcastData: Codable {
 //    
 //}
 
+// MARK - This is a temporary struct to just extract the description from the /podcast/podcast_id endpoint
+struct Description: Codable {
+    let id: String
+    var description: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, description
+    }
+}
+
 struct PodcastCollection: Codable, Identifiable {
     let href: String?
     let title, status: String
@@ -39,6 +49,7 @@ struct PodcastCollection: Codable, Identifiable {
     let imageURL: String?
     let id: String
     var downloadsData: DownloadsByInterval? // I added this, going to nest downloads data within the pod collection
+    var descriptionString: String?
     let episodes: Episodes?
     let displayOwnerEmail: Bool?
     let currentUserPermission: PodcastPermission?
