@@ -58,14 +58,12 @@ struct ChartAnalytics: View {
                              (graphData[((graphData.count - currentTab) > 0 ? (graphData.count - currentTab) : 0)...]) :
                                 ((graphData.count > currentTab) ? graphData[...currentTab] : []),
                              xUnit: calendarInterval, regularLineGraph: isPodcastOrEpisode)
-            
-//            AggregateLineGraphDisplay(inputArrayDownloads: ((graphData.count > currentTab) ? graphData[...currentTab] : []), xUnit: calendarInterval)
         }.navigationTitle(podTitle)
             .padding()
             .background{
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(Color.theme.background)
-                    .shadow(color: .primary.opacity(0.5), radius: 4)
+                    .shadow(color: .primary.opacity(0.25), radius: 3)
             }.padding()
     }
 }

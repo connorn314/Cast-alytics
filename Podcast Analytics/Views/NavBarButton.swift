@@ -8,23 +8,34 @@
 import SwiftUI
 
 struct NavBarButton: View {
-    
-    var buttonText: String
+
     var isActive: Bool
     var buttonImage: String
+    var focusImage: String
     
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                isActive ? Color.theme.accent : Color.theme.background
+                Color.theme.background
                 VStack {
-                    Image(systemName: buttonImage)
-                    Text(buttonText)
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                    ZStack (alignment: .center) {
+                        if buttonImage == "plus" {
+                            Circle()
+                                .frame(width: 60, height: 60)
+                                .foregroundColor(Color.theme.accent)
+                        }
+                        Image(systemName: isActive ? focusImage : buttonImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(buttonImage == "plus" ? Color.theme.background : Color.theme.accent)
+                    }
+//                    Text(buttonText)
+//                        .font(.caption)
+//                        .fontWeight(.semibold)
                     Spacer()
                 }.padding()
-                .foregroundColor(isActive ? Color.theme.background : Color.theme.accent)
+                .foregroundColor(Color.theme.accent)
             }
         }.ignoresSafeArea()
     }

@@ -16,21 +16,21 @@ struct PodcastIndexItem: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 5)
                     .foregroundColor(Color.theme.secondBackground)
-                HStack (alignment: .center) {
+                VStack () {
                     AsyncImage(url: URL(string: imageUrl ?? "")) { Image in
                         Image.resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 100)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(width: geo.size.width)
+                            .clipShape(RoundedRectangle(cornerRadius: 2))
+//                            .fixedSize(horizontal: false, vertical: true)
                             
                     } placeholder: {
                         ZStack (alignment: .center) {
-                            RoundedRectangle(cornerRadius: 5)
+                            RoundedRectangle(cornerRadius: 2)
                                 .foregroundColor(Color.theme.background)
-                                .frame(width: 100, height: 100)
+                                .frame(width: geo.size.width)
                                 .opacity(0.8)
                             Image(systemName: "person")
                                 .resizable()
@@ -40,17 +40,15 @@ struct PodcastIndexItem: View {
                         
                     }
                     
-                    Spacer()
                     Text(String(title))
-                        .font(.title)
+                        .font(.headline)
                         .frame(alignment: .leading)
-                    Spacer()
                 }
-                .padding()
+                .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
             }
             .frame(width: geo.size.width, height: geo.size.height)
         }
-        .frame(height: 120)
+        .frame(height: 210)
     }
 }
 

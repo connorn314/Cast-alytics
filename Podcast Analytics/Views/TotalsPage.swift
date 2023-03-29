@@ -13,6 +13,12 @@ struct TotalsPage: View {
     @State private var errorMessage: String = ""
     
     @EnvironmentObject private var vm: GeneralPodcastViewModel
+ 
+    
+    private let adaptiveColumns = [
+        GridItem(.adaptive(minimum: 170))
+    ]
+    
     
     var body: some View {
         NavigationView {
@@ -36,19 +42,24 @@ struct TotalsPage: View {
                     }
             } else {
                 ScrollView {
-                    LazyVStack (alignment: .leading){
-                        Spacer()
+                    LazyVGrid (columns: adaptiveColumns, spacing: 10){
                         ForEach(vm.generalPodcastData?.collection ?? []) { pod in
                             NavigationLink {
                                 SinglePodcastAnalytics(podId: pod.id, podTitle: pod.title)
                             } label: {
                                 PodcastIndexItem(imageUrl: pod.imageURL, title: pod.title)
+                                    .padding()
                             }
+//                            NavigationLink {
+//                                Text("Just Testing")
+//                            } label: {
+//                                PodcastIndexItem(imageUrl: pod.imageURL, title: pod.title)
+//                                    .padding()
+//                            }
                         }
                     }
-                    .padding()
                     .navigationTitle("Podcasts")
-                }
+                }.padding()
             }
         }
     }

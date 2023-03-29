@@ -14,6 +14,7 @@ struct SingleEpisodeAnalytics: View {
     let number: Int
     
     @EnvironmentObject private var vm: EpisodeDataViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State var interval: String = "day"
     @State var errorShowing: Bool = false
@@ -25,26 +26,26 @@ struct SingleEpisodeAnalytics: View {
     
     
     var body: some View {
-        if vm.episodesAnalyticsDict?[episodeId]?.downloadsByInterval == nil {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
-                .task {
-                    do {
-                        vm.episodesAnalyticsDict?[episodeId]?.downloadsByInterval = try await vm.fetchEpisodeDownloads(interval: interval, episodeId: episodeId)
-                    } catch {
-                        errorShowing.toggle()
-                        errorMessage = error.myErrorMessage()
+        ScrollView {
+            if vm.episodesAnalyticsDict?[episodeId]?.downloadsByInterval == nil {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
+                    .task {
+                        do {
+                            vm.episodesAnalyticsDict?[episodeId]?.downloadsByInterval = try await vm.fetchEpisodeDownloads(interval: interval, episodeId: episodeId)
+                        } catch {
+                            errorShowing.toggle()
+                            errorMessage = error.myErrorMessage()
+                        }
                     }
-                }
-                .alert(isPresented: $errorShowing) {
-                    Alert(
-                        title: Text("Important message"),
-                        message: Text(errorMessage),
-                        dismissButton: .default(Text("Got it!"))
-                    )
-                }
-        } else {
-            ScrollView {
+                    .alert(isPresented: $errorShowing) {
+                        Alert(
+                            title: Text("Important message"),
+                            message: Text(errorMessage),
+                            dismissButton: .default(Text("Got it!"))
+                        )
+                    }
+            } else {
                 LazyVStack (spacing: 20){
                     ChartAnalytics(isPodcastOrEpisode: false, currentTab: $currentTab, graphData: $graphData, animateChart: $animateChart, podTitle: episodeTitle, tags: [
                         0: ("7 Day", 7),
@@ -52,17 +53,14 @@ struct SingleEpisodeAnalytics: View {
                         2: ("1 month", 31)
                     ], calendarInterval: .day, intervalDescription: "Daily")
                     .task{ graphData = vm.episodesAnalyticsDict?[episodeId]?.downloadsByInterval?.byInterval ?? [] }
-                    HStack{
-                        Text("Other Analytics")
-                            .padding()
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.primary)
-                        Spacer()
-                    }
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    BackButton(dismiss: self.dismiss)
+                }
+            }
     }
 }
 

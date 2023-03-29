@@ -11,7 +11,9 @@ enum Pages: Int {
     case welcome = 0
     case overall = 1
     case episodes = 2
-    case profile = 3
+    case addEpisode = 3
+    case search = 4
+    case profile = 5
 }
 
 struct ContentView: View {

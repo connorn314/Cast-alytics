@@ -14,6 +14,7 @@ struct SinglePodcastAnalytics: View {
     var apiKey: String = Bundle.main.infoDictionary?["API_KEY"] as! String
     
     @EnvironmentObject private var vm: GeneralPodcastViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State var interval: String = "week"
     @State var errorShowing: Bool = false
@@ -25,30 +26,31 @@ struct SinglePodcastAnalytics: View {
     @State var presentShowDescription = false
     
     var body: some View {
-        if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
-                .task {
-                    do {
-                        try await vm.loadPodcastDownloads(podId: podId, interval: interval)
-//                        print("here: \(vm.analyticsCollectionDict?[podId]?.description ?? "didn't set")")
-                    } catch {
-                        print("now error throwing should toggle")
-                        print("error: \(error.myErrorMessage())")
-                        print("or: \(error.localizedDescription)")
-                        errorShowing.toggle()
-                        errorMessage = error.myErrorMessage()
+        ScrollView {
+            if vm.analyticsCollectionDict?[podId]?.downloadsData == nil {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.theme.accent))
+                    .task {
+                        do {
+                            try await vm.loadPodcastDownloads(podId: podId, interval: interval)
+    //                        print("here: \(vm.analyticsCollectionDict?[podId]?.description ?? "didn't set")")
+                        } catch {
+                            print("now error throwing should toggle")
+                            print("error: \(error.myErrorMessage())")
+                            print("or: \(error.localizedDescription)")
+                            errorShowing.toggle()
+                            errorMessage = error.myErrorMessage()
+                        }
                     }
-                }
-                .alert(isPresented: $errorShowing) {
-                    Alert(
-                        title: Text("Important message"),
-                        message: Text(errorMessage),
-                        dismissButton: .default(Text("Got it!"))
-                    )
-                }
-        } else {
-            ScrollView {
+                    .alert(isPresented: $errorShowing) {
+                        Alert(
+                            title: Text("Important message"),
+                            message: Text(errorMessage),
+                            dismissButton: .default(Text("Got it!"))
+                        )
+                    }
+            } else {
+            
                 LazyVStack (spacing: 20){
                     ChartAnalytics(isPodcastOrEpisode: true, currentTab: $currentTab, graphData: $graphData, animateChart: $animateChart, podTitle: podTitle, tags: [
                         0: ("YTD", 12),
@@ -92,6 +94,15 @@ struct SinglePodcastAnalytics: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackButton(dismiss: self.dismiss)
+            }
+        }
+//            .toolbar {
+//                BackButton(dismiss: self.dismiss)
+//            }
     }
 }
 

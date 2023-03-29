@@ -25,7 +25,12 @@ struct LineGraphDisplay: View {
             .foregroundStyle(.primary)
             AreaMark(x: .value("Week", week.interval, unit: xUnit),
                      y: .value("Downloads", week.downloadsTotal))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(
+                .linearGradient(stops: [
+                    .init(color: Color.theme.accent.opacity(0.5), location: 0.5),
+                    .init(color: Color.theme.background.opacity(0), location: 1)
+                ], startPoint: .top, endPoint: .bottom)
+            )
         }.frame(height: 250)
             .chartXAxisLabel("Weeks")
             .chartYAxisLabel("Downloads")
