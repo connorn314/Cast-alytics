@@ -57,12 +57,13 @@ struct AudienceAnalyticsPage: View {
                         Spacer(minLength: 40)
                         ZStack (alignment: .center){
                             RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(Color.theme.secondBackground.opacity(0.1))
+                                .foregroundColor(Color.theme.secondBackground.opacity(0.2))
                             VStack {
                                 ForEach(Array(slices.sorted(by: {$0.key < $1.key})), id: \.key) { index, value in
                                     VStack {
-                                        RoundedRectangle(cornerRadius: 3)
+                                        RoundedRectangle(cornerRadius: 2.5)
                                             .foregroundColor(Color.primary)
+                                            .frame(height: 5)
                                         HStack {
                                             Text("\(index + 1). \(value.0)")
                                             Rectangle()
@@ -73,8 +74,9 @@ struct AudienceAnalyticsPage: View {
                                             .fontWeight(.semibold)
                                     }
                                 }
-                                RoundedRectangle(cornerRadius: 3)
+                                RoundedRectangle(cornerRadius: 2.5)
                                     .foregroundColor(Color.primary)
+                                    .frame(height: 5)
                             }.padding()
                         }
                     }

@@ -29,13 +29,11 @@ struct DonutChart: View {
             var pieContext = context
             pieContext.rotate(by: .degrees(-90))
             let radius = min(size.width, size.height) * 0.48
-                    let gapSize = Angle(degrees: 5) // size of the gap between slices in degrees
 
             var startAngle = Angle.zero
-            for (key, tupValues) in slices.sorted(by: {$0.key < $1.key}) {
+            for (_, tupValues) in slices.sorted(by: {$0.key < $1.key}) {
                 let value = tupValues.1
                 let color = tupValues.2
-                print ("rank: \(String(key)) \(String(tupValues.0)), dls: \(String(value)), color: \(color.name)")
                 let angle = Angle(degrees: (360 * (value / Double(total))))
                 let endAngle = startAngle + angle
                 let path = Path { p in
