@@ -34,7 +34,7 @@ struct NavBar: View {
                     NavBarButton(isActive: false, buttonImage: "", focusImage: "") // none
                 }
                 Button {
-                    selectedPage = .episodes
+                    selectedPage = .search
                 } label: {
                     NavBarButton(isActive: (selectedPage == .search), buttonImage: "magnifyingglass", focusImage: "magnifyingglass") // none
                 }

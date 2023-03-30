@@ -31,6 +31,10 @@ struct ContentView: View {
                    AudienceAnalyticsPage()
                case .profile:
                    ProfilePage()
+               case .addEpisode:
+                   AddPodcastPage()
+               case .search:
+                   SearchPage()
                default:
                    TotalsPage()
                }

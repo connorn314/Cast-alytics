@@ -50,6 +50,7 @@ struct PodcastCollection: Codable, Identifiable {
     let id: String
     var downloadsData: DownloadsByInterval? // I added this, going to nest downloads data within the pod collection
     var descriptionString: String?
+    var distributionMethodAnalytics: [DistributionMethod]?
     let episodes: Episodes?
     let displayOwnerEmail: Bool?
     let currentUserPermission: PodcastPermission?

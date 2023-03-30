@@ -41,3 +41,22 @@ struct Listen: Codable, Identifiable  {
         case total, id
     }
 }
+
+struct AllDBMethods: Codable {
+    let href: String?
+    let collection: [DistributionMethod]?
+}
+
+struct DistributionMethod: Codable, Identifiable {
+    let id: UUID = UUID()
+    let rank: Int
+    let name: String
+    let downloadsTotal: Int
+    let downloadsPercent: Double
+
+    enum CodingKeys: String, CodingKey {
+        case rank, name
+        case downloadsTotal = "downloads_total"
+        case downloadsPercent = "downloads_percent"
+    }
+}

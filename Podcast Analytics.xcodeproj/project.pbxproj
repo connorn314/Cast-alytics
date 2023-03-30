@@ -16,6 +16,9 @@
 		4D7C319C29CB6EDB0048362C /* GeneralPodcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C319B29CB6EDB0048362C /* GeneralPodcastData.swift */; };
 		4D7C319E29CB70780048362C /* GeneralPodcastAndPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C319D29CB70780048362C /* GeneralPodcastAndPermissions.swift */; };
 		4D7C31A029CB80170048362C /* PodcastIndexItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C319F29CB80170048362C /* PodcastIndexItem.swift */; };
+		4D88F4EE29D4F4B6004FC21D /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D88F4ED29D4F4B6004FC21D /* DonutChart.swift */; };
+		4D88F4F029D50D5E004FC21D /* AddPodcastPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D88F4EF29D50D5E004FC21D /* AddPodcastPage.swift */; };
+		4D88F4F229D50E23004FC21D /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D88F4F129D50E23004FC21D /* SearchPage.swift */; };
 		4D8C7BC929C5138E003D45C9 /* BasicFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8C7BC829C5138E003D45C9 /* BasicFetch.swift */; };
 		4D93BAD129C4E6E20030BCDB /* EpisodeListIndexItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93BAD029C4E6E20030BCDB /* EpisodeListIndexItem.swift */; };
 		4DA89C9729A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA89C9629A6BC5D00B0EA15 /* Podcast_AnalyticsApp.swift */; };
@@ -49,6 +52,9 @@
 		4D7C319B29CB6EDB0048362C /* GeneralPodcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPodcastData.swift; sourceTree = "<group>"; };
 		4D7C319D29CB70780048362C /* GeneralPodcastAndPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPodcastAndPermissions.swift; sourceTree = "<group>"; };
 		4D7C319F29CB80170048362C /* PodcastIndexItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastIndexItem.swift; sourceTree = "<group>"; };
+		4D88F4ED29D4F4B6004FC21D /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
+		4D88F4EF29D50D5E004FC21D /* AddPodcastPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPodcastPage.swift; sourceTree = "<group>"; };
+		4D88F4F129D50E23004FC21D /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		4D8C7BC829C5138E003D45C9 /* BasicFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFetch.swift; sourceTree = "<group>"; };
 		4D93BAD029C4E6E20030BCDB /* EpisodeListIndexItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListIndexItem.swift; sourceTree = "<group>"; };
 		4DA373F429BA572200FBB001 /* SecureKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecureKeys.xcconfig; sourceTree = "<group>"; };
@@ -158,6 +164,7 @@
 				4DAF703729D23A5900605058 /* ShowDescription.swift */,
 				4DF38C5F29CE3C9600E2A375 /* ChartAnalytics.swift */,
 				4D38242D29CCCFB0000D955F /* LineGraphDisplay.swift */,
+				4D88F4ED29D4F4B6004FC21D /* DonutChart.swift */,
 				4D7C319F29CB80170048362C /* PodcastIndexItem.swift */,
 				4DD0C5D129B11DA400063FDE /* NavBar.swift */,
 				4D622B8629B9415100D30223 /* NavBarButton.swift */,
@@ -167,6 +174,8 @@
 				4DAF702F29D207D100605058 /* AudienceAnalyticsPage.swift */,
 				4D622B8C29B943B100D30223 /* ProfilePage.swift */,
 				4DAF703529D228A800605058 /* ProfilePageRow.swift */,
+				4D88F4F129D50E23004FC21D /* SearchPage.swift */,
+				4D88F4EF29D50D5E004FC21D /* AddPodcastPage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,7 +260,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D88F4EE29D4F4B6004FC21D /* DonutChart.swift in Sources */,
 				4DD0C5D229B11DA400063FDE /* NavBar.swift in Sources */,
+				4D88F4F229D50E23004FC21D /* SearchPage.swift in Sources */,
 				4DAF703029D207D100605058 /* AudienceAnalyticsPage.swift in Sources */,
 				4DF2063B29CBC12000959D4B /* SinglePodcastAnalytics.swift in Sources */,
 				4D622B8729B9415100D30223 /* NavBarButton.swift in Sources */,
@@ -269,6 +280,7 @@
 				4DAF703829D23A5900605058 /* ShowDescription.swift in Sources */,
 				4D38242E29CCCFB0000D955F /* LineGraphDisplay.swift in Sources */,
 				4D7C319E29CB70780048362C /* GeneralPodcastAndPermissions.swift in Sources */,
+				4D88F4F029D50D5E004FC21D /* AddPodcastPage.swift in Sources */,
 				4DA89C9929A6BC5D00B0EA15 /* ContentView.swift in Sources */,
 				4D7C319C29CB6EDB0048362C /* GeneralPodcastData.swift in Sources */,
 				4DF2063F29CBD34400959D4B /* ListenersData.swift in Sources */,
